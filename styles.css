@@ -1,0 +1,36 @@
+.add-search-forms {
+  background-color: #A9AAD2;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.form input, .form label {
+  max-width: 100px;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-idea-button {
+  background-color: #1F1F3D;
+  color: #E9E9F3;
+  font: open sans, light;
+}
+
+input { 
+  font: open sans, light;
+  font-size: 2vw;
+}
