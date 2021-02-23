@@ -14,23 +14,54 @@
 }
 
 .form input, .form label {
+  font-size: 2vw;
+  color: #1F1F3D;
   max-width: 100px;
+  font-family: open sans, light;
 }
 
-.search-bar {
+.save-idea-button {
+  background-color: #1F1F3D;
+  color: #E9E9F3;
+  font-family: open sans, light;
+}
+
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+/* **********Search Bar********** */
+
+.search {
+  width: 40vw;
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: center;
 }
 
-.save-idea-button {
-  background-color: #1F1F3D;
-  color: #E9E9F3;
-  font: open sans, light;
+.searchTerm {
+  width: 100%;
+  border: 3px solid #1F1F3D;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #EAEAF4;
 }
 
-input { 
-  font: open sans, light;
-  font-size: 2vw;
+.searchTerm:focus{
+  color: #1F1F3D;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid ##1F1F3D;
+  background: ##1F1F3D;
+  text-align: center;
+  color: #1F1F3D;
+  font-size: 20px;
 }
