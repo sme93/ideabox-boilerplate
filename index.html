@@ -14,16 +14,22 @@
         </div>
     </aside>
     <main>
-      <section class="form-section">
-        <form class="" action="index.html" method="post">
+      <section class="form-section add-search-forms">
+        <form class="form" action="index.html" method="post">
           <label for="title">Title</label>
           <input type="text" name="title" value="">
           <label for="body">Body</label>
           <input type="text" name="body" value="">
-          <input type="submit" name="save" value="Save">
+          <input class="save-idea-button" type="submit" name="save" value="Save">
         </form>
-        <form class="" action="index.html" method="post">
-        </form>
+        <div class="wrap">
+          <div class="search">
+            <button type="submit" class="searchButton"></button>
+              <i class="fa fa-search"></i>
+              </button>
+            <input type="text" class="searchTerm" placeholder="Search Ideas">
+          </div>
+        </div>
       </section>
       <section class="ideas-section">
         <article class="">
@@ -33,3 +39,4 @@
     <script src="./src/main.js"></script>
   </body>
 </html>
+
