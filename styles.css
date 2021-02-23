@@ -10,14 +10,19 @@
   flex-direction: column;
   flex: 1;
   align-items: center;
-  justify-content: center;
+  padding: .825rem;
 }
 
 .form input, .form label {
-  font-size: 2vw;
   color: #1F1F3D;
-  max-width: 100px;
+  max-width: 40%;
+  min-width: 40%;
   font-family: open sans, light;
+}
+
+.form label {
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .save-idea-button {
