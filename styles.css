@@ -10,6 +10,8 @@ body {
     height: 100%;
     display: flex;
     justify-content: center;
+    background: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -29,12 +31,33 @@ main {
 }
 /* End Shared CSS */
 /*  Sarah's CSS begin */
+.button {
+  background-color: #353567;
+  font-weight: bold;
+  color: #E9E9F3;
+  height: 2rem;
+  /* border-style: none; */
+}
+
+.inputs {
+  border: 2px solid #5356A4;
+}
+
+.title-input {
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.body-input {
+  height: 4rem;
+  margin-bottom: 1rem;
+}
 
 .add-search-forms {
   background-color: #A9AAD2;
-  height: 40vh;
   display: flex;
   flex-direction: column;
+   padding: .825rem;
 }
 
 .form {
@@ -42,30 +65,19 @@ main {
   flex-direction: column;
   flex: 1;
   align-items: center;
-  padding: .825rem;
-}
+ }
 
-.form input, .form label {
-  color: #1F1F3D;
+.form input, .form label, .search {
   max-width: 40%;
   min-width: 40%;
   font-family: open sans, light;
 }
 
 .form label {
+  color: #1F1F3D;
   font-weight: bold;
-  font-size: 1rem;
-}
-
-.save-idea-button {
-  background-color: #1F1F3D;
-  color: #E9E9F3;
-  font-family: open sans, light;
-}
-
-body{
-  background: #f2f2f2;
-  font-family: 'Open Sans', sans-serif;
+  font-size: .75rem;
+  margin-bottom: .25rem;
 }
 
 
@@ -74,33 +86,37 @@ body{
 .search {
   width: 40vw;
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 
-.searchTerm {
+.search form {
+  display: flex;
+  flex: 1;
+}
+
+.search-term {
   width: 100%;
-  border: 3px solid #1F1F3D;
-  padding: 5px;
+  min-height:2rem;
+}
+
+.search-term:focus{
+  color: #1F1F3D;
+}
+
+.search-button {
+  width: 20px;
   height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #EAEAF4;
 }
 
-.searchTerm:focus{
-  color: #1F1F3D;
-}
-
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #1F1F3D;
-  background: #1F1F3D;
-  text-align: center;
-  color: #1F1F3D;
-  font-size: 20px;
+.search-icon {
+  min-width: 2.35rem;
+  min-height: 2.35rem;
+  background:#353567;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*  Sarah's CSS end */
