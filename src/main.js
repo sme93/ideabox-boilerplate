@@ -1,5 +1,5 @@
 //****Global Variables ****
-
+var newIdea = new Idea(title, body);
 
 
 
