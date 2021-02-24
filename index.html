@@ -6,32 +6,32 @@
     <link rel="stylesheet" type="text/css" href="./styles.css">
   </head>
   <body>
-    <aside>
-      <h1>IdeaBox</h1>
-        <div>
-          <p>Filter Starred Ideas</p>
-          <button class="show-starred" type="button" name="button">Show Starred Ideas</button>
-        </div>
+    <aside class="side-bar">
+      <h1 class="main-title">IdeaBox</h1>
+      <div class="show-ideas-con" >
+        <p class="show-ideas-label">Filter Starred Ideas</p>
+        <button class="show-ideas-button" id="showIdeasButton" type="button" name="button">Show Starred Ideas</button>
+      </div>
     </aside>
     <main>
       <section class="form-section add-search-forms">
         <form class="form" action="index.html" method="post">
           <label for="title">Title</label>
-          <input class="title-input inputs" type="text" name="title" value="">
+          <input class="title-input inputs" id="titleInput" type="text" name="title" value="">
           <label for="body">Body</label>
-          <input class="body-input inputs" type="text" name="body" value="">
-          <input class="button inputs" type="submit" name="save" value="Save">
+          <input class="body-input inputs" id="bodyInput" type="text" name="body" value="">
+          <input class="button inputs" id="saveIdeaButton" type="submit" name="save" value="Save">
         </form>
           <div class="search">
             <form class="inputs">
               <div class="search-icon">
                 <input class="search-button" type="image"alt="Search icon" src="./images/search.svg">
               </div>
-              <input class="search-term" type="text" placeholder="Search Ideas">
+              <input class="search-term" id="searchInput" type="text" placeholder="Search Ideas">
             </form>
           </div>
       </section>
-      <section class="idea-board">
+      <section class="idea-board" id="ideaBoard">
         <article class="idea">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" alt="Star favorite" src="./images/star-active.svg">
@@ -48,15 +48,15 @@
         </article>
         <article class="idea">
           <div class="card-top-bar">
-            <input type="image" class="card-top-button" alt="Star favorite" src="./images/star-active.svg">
-            <input type="image" class="card-top-button" alt="Delete card" src="./images/delete.svg">
+            <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src="./images/star-active.svg">
+            <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
           </div>
           <div class="card-text">
             <h3>Idea Title</h3>
             <p class="card-body">Idea body. Don't ever play yourself. Every chance I get, I water the plants, Lion! Cloth talk.</p>
           </div>
           <div class="card-bottom-bar">
-            <input type="image" class="comment-button" alt="Add comment" src="./images/comment.svg">
+            <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
             Comment
           </div>
         </article>
