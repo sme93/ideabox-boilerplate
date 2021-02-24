@@ -176,7 +176,10 @@ aside > div > p {
 
 
 .idea-board {
-  height: 70vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+
   background-color: #EAEAF4;
 
   font-family: open sans, light;
@@ -200,6 +203,8 @@ aside > div > p {
   display: flex;
   justify-content: space-between;
 
+  min-height: 25px;
+
   background-color: #1F1F3D;
 }
 
@@ -209,13 +214,21 @@ aside > div > p {
 }
 
 .card-text {
+  display: flex;
+  flex-direction: column;
   padding: .5rem;
   color: #1F1F3D;
 
 }
 
+.card-body {
+  margin-top: 10px;
+}
+
 .card-bottom-bar {
+  display: flex;
   height: 2vw;
+  min-height: 25px;
 
   background-color: #5356A4;
   color: #E9E9F3;
