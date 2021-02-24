@@ -1,3 +1,4 @@
+
 /* Shared CSS */
 html {
     width: 100%;
@@ -150,5 +151,63 @@ aside > div > p {
 }
 /*  Jon's CSS end */
 /*  Riley's CSS begin */
-/*  Riley's CSS end */
 
+*{
+  /* border: 1px solid;
+  border-color: blue; */
+  margin: 0;
+}
+
+
+.idea-board {
+  height: 70vh;
+  background-color: #EAEAF4;
+
+  font-family: open sans, light;
+}
+
+.idea {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20vw;
+  height: 20vw;
+  min-width: 200px;
+  min-height: 200px;
+  margin: 1vw;
+  border: solid 1px;
+  boder-color: #1F1F3D;
+  background-color: #FFFFFF;
+}
+
+.card-top-bar {
+  display: flex;
+  justify-content: space-between;
+
+  background-color: #1F1F3D;
+}
+
+.card-top-button {
+  width: 2vw;
+  min-width: 25px;
+}
+
+.card-text {
+  padding: .5rem;
+  color: #1F1F3D;
+
+}
+
+.card-bottom-bar {
+  height: 2vw;
+
+  background-color: #5356A4;
+  color: #E9E9F3;
+}
+
+.comment-button {
+    width: 2vw;
+    min-width: 25px;
+}
+
+/*  Riley's CSS end */
