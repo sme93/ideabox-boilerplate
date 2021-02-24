@@ -86,33 +86,37 @@ main {
 .search {
   width: 40vw;
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 
-.searchTerm {
+.search form {
+  display: flex;
+  flex: 1;
+}
+
+.search-term {
   width: 100%;
-  border: 3px solid #1F1F3D;
-  padding: 5px;
+  min-height:2rem;
+}
+
+.search-term:focus{
+  color: #1F1F3D;
+}
+
+.search-button {
+  width: 20px;
   height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #EAEAF4;
 }
 
-.searchTerm:focus{
-  color: #1F1F3D;
-}
-
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #1F1F3D;
-  background: #1F1F3D;
-  text-align: center;
-  color: #1F1F3D;
-  font-size: 20px;
+.search-icon {
+  min-width: 2.35rem;
+  min-height: 2.35rem;
+  background:#353567;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*  Sarah's CSS end */
