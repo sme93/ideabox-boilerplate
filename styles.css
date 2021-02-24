@@ -104,13 +104,13 @@ body{
 
 /*  Sarah's CSS end */
 /*  Jon's CSS begin */
-aside {
+.side-bar {
     width: 25%;
     height: 100%;
     background-color: #1F1F3D;
 }
 
-h1 {
+.main-title {
     margin-top: 0px;
     padding-top: 20px;
     padding-left: 15px;
@@ -118,7 +118,7 @@ h1 {
     color: #E9E9F3;
 }
 
-aside > div {
+.show-star-con {
     font-weight: normal;
     border-top: solid;
     border-bottom: solid;
@@ -127,7 +127,7 @@ aside > div {
     padding: 20px 15px 30px 15px;
 }
 
-aside > div > p {
+.show-star-label {
     margin: 0px 0px;
     font-size: 1rem;
     font-weight: bold;
