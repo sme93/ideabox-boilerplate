@@ -18,7 +18,7 @@ var ideaBoard = document.querySelector("#ideaBoard");
 //**** Event Listeners ****
 ideaBoard.addEventListener("click", function(event) {
   if (event.target.id === "deleteButton") {
-    deleteIdea();
+    deleteIdea(event);
   };
 });
 saveButton.addEventListener("click", saveIdea);
@@ -37,16 +37,16 @@ function saveIdea(event) {
     event.preventDefault();
     newIdea = new Idea(title.value, body.value);
     ideas.push(newIdea);
-    render();
+    render(newIdea);
     clearInputs();
 }
 
-function render() {
+function render(newIdea) {
     var markup = "";
 
     for (var i = 0; i < ideas.length; i++) {
         markup += `
-        <article class="idea">
+        <article class="idea" id="${newIdea.id}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src="./images/star-active.svg">
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
@@ -71,6 +71,9 @@ function clearInputs() {
   body.value = null;
 }
 
-function deleteIdea() {
+function deleteIdea(event) {
+  var idea = event.target;
 
+  idea.closest("article").remove();
+  ideas.splice(indexOf(idea.id))
 }
