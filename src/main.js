@@ -37,7 +37,7 @@ function saveIdea(event) {
     event.preventDefault();
     newIdea = new Idea(title.value, body.value);
     ideas.push(newIdea);
-    render(newIdea);
+    render();
     clearInputs();
 }
 
