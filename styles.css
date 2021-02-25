@@ -138,7 +138,7 @@ main {
 
 
 
-.show-star-con {
+.show-ideas-con {
     font-weight: normal;
     border-top: solid;
     border-bottom: solid;
@@ -147,14 +147,14 @@ main {
     padding: 20px 15px 30px 15px;
 }
 
-.show-star-label {
+.show-ideas-label {
     margin: 0px 0px;
     font-size: 1rem;
     font-weight: bold;
     color: #BFBFDD;
 }
 
-.show-star-button {
+.show-ideas-button {
     display: block;
     background-color: #5356A4;
     width: 100%;
