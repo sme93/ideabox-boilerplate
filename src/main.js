@@ -17,6 +17,11 @@ var ideaBoard = document.querySelector("#ideaBoard");
 
 //**** Event Listeners ****
 saveButton.addEventListener("click", saveIdea);
+ideaBoard.addEventListener("click", function(event) {
+  if (event.target.id === "favoriteButton") {
+    console.log("wtf");
+  }
+})
 
 
 
