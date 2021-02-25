@@ -46,7 +46,7 @@ function render(newIdea) {
 
     for (var i = 0; i < ideas.length; i++) {
         markup += `
-        <article class="idea" id="${newIdea.id}">
+        <article class="idea" id="${ideas[i].id}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src="./images/star-active.svg">
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
@@ -72,8 +72,16 @@ function clearInputs() {
 }
 
 function deleteIdea(event) {
-  var idea = event.target;
+  var ideaId = event.target.closest("article").id;
 
-  idea.closest("article").remove();
-  ideas.splice(indexOf(idea.id))
+  removeFromDataModel(ideaId);
+  render();
+}
+
+function removeFromDataModel(ideaId) {
+  for (var i = 0; i < ideas.length; i++) {
+    if (parseInt(ideaId) === ideas[i].id) {
+      ideas.splice(i, 1);
+    }
+  }
 }
