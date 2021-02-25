@@ -33,6 +33,7 @@ function saveIdea() {
     newIdea = new Idea(title.value, body.value);
     ideas.push(newIdea);
     render();
+    clearInputs();
 }
 
 function render() {
@@ -58,4 +59,9 @@ function render() {
     }
 
     ideaBoard.innerHTML = markup;
+}
+
+function clearInputs() {
+  title.value = null;
+  body.value = null;
 }
