@@ -242,4 +242,9 @@ main {
     min-width: 25px;
 }
 
+.disable-save {
+  cursor: not-allowed;
+  background-color: #6F6FCA;
+}
+
 /*  Riley's CSS end */

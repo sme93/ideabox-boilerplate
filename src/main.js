@@ -14,26 +14,25 @@ var ideaBoard = document.querySelector("#ideaBoard");
 
 
 
-
 //**** Event Listeners ****
 saveButton.addEventListener("click", saveIdea);
+title.addEventListener("input", showSave);
+body.addEventListener("input", showSave);
 
 
 
 
-
-
-
-
-
-
-//**** Functions **** 
+//**** Functions ****
 function saveIdea(event) {
-    event.preventDefault();
-    newIdea = new Idea(title.value, body.value);
-    ideas.push(newIdea);
-    render();
-    clearInputs();
+  event.preventDefault();
+  if (!title.value || !body.value) {
+    return
+  }
+  newIdea = new Idea(title.value, body.value);
+  ideas.push(newIdea);
+  render();
+  clearInputs();
+  saveButton.classList.add('disable-save');
 }
 
 function render() {
@@ -59,9 +58,15 @@ function render() {
     }
 
     ideaBoard.innerHTML = markup;
-} 
+}
 
 function clearInputs() {
   title.value = null;
   body.value = null;
+}
+
+function showSave () {
+  if (title.value && body.value) {
+    saveButton.classList.remove('disable-save');
+  }
 }
