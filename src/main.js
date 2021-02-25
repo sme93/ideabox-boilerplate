@@ -36,7 +36,7 @@ function saveIdea() {
 }
 
 function render() {
-    var ideasToRender = "";
+    var markup = "";
 
     for (var i = 0; i < ideas.length; i++) {
         ideasToRender += `
@@ -57,5 +57,5 @@ function render() {
         `;
     }
 
-    ideaBoard.innerHTML = ideasToRender;
+    ideaBoard.innerHTML = markup;
 }
