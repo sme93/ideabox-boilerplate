@@ -28,7 +28,7 @@ saveButton.addEventListener("click", saveIdea);
 
 
 //**** Functions **** 
-function saveIdea() {
+function saveIdea(event) {
     event.preventDefault();
     newIdea = new Idea(title.value, body.value);
     ideas.push(newIdea);
