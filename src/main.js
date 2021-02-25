@@ -16,6 +16,11 @@ var ideaBoard = document.querySelector("#ideaBoard");
 
 
 //**** Event Listeners ****
+ideaBoard.addEventListener("click", function(event) {
+  if (event.target.id === "deleteButton") {
+    deleteIdea();
+  };
+});
 saveButton.addEventListener("click", saveIdea);
 
 
@@ -64,4 +69,8 @@ function render() {
 function clearInputs() {
   title.value = null;
   body.value = null;
+}
+
+function deleteIdea() {
+
 }
