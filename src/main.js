@@ -41,7 +41,7 @@ function saveIdea(event) {
     clearInputs();
 }
 
-function render(newIdea) {
+function render() {
     var markup = "";
 
     for (var i = 0; i < ideas.length; i++) {
