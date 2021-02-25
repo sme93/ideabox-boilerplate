@@ -28,18 +28,19 @@ saveButton.addEventListener("click", saveIdea);
 
 
 //**** Functions **** 
-function saveIdea() {
+function saveIdea(event) {
     event.preventDefault();
     newIdea = new Idea(title.value, body.value);
     ideas.push(newIdea);
     render();
+    clearInputs();
 }
 
 function render() {
     var markup = "";
 
     for (var i = 0; i < ideas.length; i++) {
-        ideasToRender += `
+        markup += `
         <article class="idea">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src="./images/star-active.svg">
@@ -58,4 +59,9 @@ function render() {
     }
 
     ideaBoard.innerHTML = markup;
+} 
+
+function clearInputs() {
+  title.value = null;
+  body.value = null;
 }
