@@ -35,10 +35,6 @@ function saveIdea() {
     render();
 }
 
-// function createCard() {
-
-// }
-
 function render() {
     var listIdeas = "";
 
@@ -63,4 +59,3 @@ function render() {
 
     ideaBoard.innerHTML = listIdeas;
 }
-
