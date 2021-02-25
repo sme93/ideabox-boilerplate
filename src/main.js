@@ -36,10 +36,10 @@ function saveIdea() {
 }
 
 function render() {
-    var listIdeas = "";
+    var ideasToRender = "";
 
     for (var i = 0; i < ideas.length; i++) {
-        listIdeas += `
+        ideasToRender += `
         <article class="idea">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src="./images/star-active.svg">
@@ -57,5 +57,5 @@ function render() {
         `;
     }
 
-    ideaBoard.innerHTML = listIdeas;
+    ideaBoard.innerHTML = ideasToRender;
 }
