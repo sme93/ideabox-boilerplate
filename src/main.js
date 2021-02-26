@@ -30,7 +30,7 @@ title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 searchBar.addEventListener("input", filterIdeas);
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
-window.addEventListener("load", render);
+window.addEventListener("load", renderPage);
 
 
 
