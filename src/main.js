@@ -16,6 +16,11 @@ var ideaBoard = document.querySelector("#ideaBoard");
 
 
 //**** Event Listeners ****
+ideaBoard.addEventListener("click", function(event) {
+  if (event.target.id === "deleteButton") {
+    deleteIdea(event);
+  };
+});
 saveButton.addEventListener("click", saveIdea);
 
 
@@ -41,7 +46,7 @@ function render() {
 
     for (var i = 0; i < ideas.length; i++) {
         markup += `
-        <article class="idea">
+        <article class="idea" id="${ideas[i].id}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src="./images/star-active.svg">
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
@@ -64,4 +69,19 @@ function render() {
 function clearInputs() {
   title.value = null;
   body.value = null;
+}
+
+function deleteIdea(event) {
+  var ideaId = event.target.closest("article").id;
+
+  removeFromDataModel(ideaId);
+  render();
+}
+
+function removeFromDataModel(ideaId) {
+  for (var i = 0; i < ideas.length; i++) {
+    if (parseInt(ideaId) === ideas[i].id) {
+      ideas.splice(i, 1);
+    }
+  }
 }
