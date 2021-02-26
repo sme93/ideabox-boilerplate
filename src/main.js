@@ -110,6 +110,10 @@ function deleteIdea(event) {
 }
 
 
-function toggleStarredIdeas() {
-  console.log("hello");
+function toggleStarredIdeas(event) {
+  if (event.srcElement.innerText === "Show Starred Ideas") {
+    toggleStarredIdeasButton.innerHTML = "Show All Ideas";
+  } else {
+    toggleStarredIdeasButton.innerHTML = "Show Starred Ideas"
+  }
 }
