@@ -38,9 +38,9 @@ function saveIdea(event) {
 
 function render() {
     var markup = "";
-    var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+    // var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
 
-    for (var i = 0; i < retrievedIdeas.length; i++) {
+    for (var i = 0; i < ideas.length; i++) {
         markup += `
         <article class="idea">
           <div class="card-top-bar">
@@ -48,8 +48,8 @@ function render() {
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
           </div>
           <div class="card-text">
-            <h3>${retrievedIdeas[i].title}</h3>
-            <p class="card-body">${retrievedIdeas[i].body}</p>
+            <h3>${ideas[i].title}</h3>
+            <p class="card-body">${ideas[i].body}</p>
           </div>
           <div class="card-bottom-bar">
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
