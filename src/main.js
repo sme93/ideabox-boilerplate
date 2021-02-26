@@ -77,7 +77,7 @@ function clearInputs() {
   body.value = null;
 }
 
-function favoriteIdea() {
+function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
 
