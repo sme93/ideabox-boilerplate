@@ -10,6 +10,7 @@ var ideas = [];
 var saveButton = document.querySelector("#saveIdeaButton");
 var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
+var searchBar = document.querySelector("#searchInput");
 var ideaBoard = document.querySelector("#ideaBoard");
 
 
@@ -19,7 +20,13 @@ ideaBoard.addEventListener("click", deleteIdea);
 saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
+searchBar.addEventListener("input", logData)
 ideaBoard.addEventListener("click", favoriteIdea); 
+
+function logData(event) {
+  console.log(event.target.value);
+
+}
 
 
 
@@ -108,3 +115,4 @@ function deleteIdea(event) {
     render();
   }
 }
+
