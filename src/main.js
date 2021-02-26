@@ -19,18 +19,18 @@ var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
 var searchBar = document.querySelector("#searchInput");
 var ideaBoard = document.querySelector("#ideaBoard");
-
+var toggleStarredIdeasButton = document.querySelector("#showIdeasButton");
 
 
 //**** Event Listeners ****
 ideaBoard.addEventListener("click", deleteIdea);
+ideaBoard.addEventListener("click", favoriteIdea);
 saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 searchBar.addEventListener("input", filterIdeas);
-ideaBoard.addEventListener("click", favoriteIdea);
+toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", render);
-
 
 
 
@@ -49,23 +49,27 @@ function saveIdea(event) {
   saveButton.classList.add('disable-save');
 }
 
-function render(ideas) {
-    var markup = "";
-    //get stringified ideas out of local storage and assign to variable retrievedIdeas
-    //need to do this each time we render in case there were any new saved ideas or deleted ideas during current browswer session
-    var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+function renderPage() {
+  //get stringified ideas out of local storage and assign to variable retrievedIdeas
+  //need to do this each time we render in case there were any new saved ideas or deleted ideas during current browswer session
+  var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+  render(retrievedIdeas);
+}
 
-    for (var i = 0; i < ideas.length; i++) {
-      var imageSource = getImageSourceFromIdea(ideas[i]);
+function render(arrayToRender) {
+    var markup = "";
+    
+    for (var i = 0; i < arrayToRender.length; i++) {
+      var imageSource = getImageSourceFromIdea(arrayToRender[i]);
         markup += `
-        <article class="idea" id="${ideas[i].id}">
+        <article class="idea" id="${arrayToRender[i].id}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
           </div>
           <div class="card-text">
-            <h3>${ideas[i].title}</h3>
-            <p class="card-body">${ideas[i].body}</p>
+            <h3>${arrayToRender[i].title}</h3>
+            <p class="card-body">${arrayToRender[i].body}</p>
           </div>
           <div class="card-bottom-bar">
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
@@ -120,6 +124,16 @@ function deleteIdea(event) {
         ideas.splice(i, 1);
       }
     }
+    render(ideas);
+  }
+}
+
+function toggleStarredIdeas(event) {
+  if (event.srcElement.innerText === "Show Starred Ideas") {
+    toggleStarredIdeasButton.innerHTML = "Show All Ideas";
+    render(ideas);
+  } else {
+    toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
     render(ideas);
   }
 }
