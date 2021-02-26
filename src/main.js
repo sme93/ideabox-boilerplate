@@ -14,29 +14,27 @@ var ideaBoard = document.querySelector("#ideaBoard");
 
 
 
-
 //**** Event Listeners ****
 ideaBoard.addEventListener("click", deleteIdea);
 saveButton.addEventListener("click", saveIdea);
+title.addEventListener("input", showSave);
+body.addEventListener("input", showSave);
 ideaBoard.addEventListener("click", favoriteIdea); 
 
 
 
 
-
-
-
-
-
-
-
-//**** Functions **** 
+//**** Functions ****
 function saveIdea(event) {
-    event.preventDefault();
-    newIdea = new Idea(title.value, body.value);
-    ideas.push(newIdea);
-    render();
-    clearInputs();
+  event.preventDefault();
+  if (!title.value || !body.value) {
+    return
+  }
+  newIdea = new Idea(title.value, body.value);
+  ideas.push(newIdea);
+  render();
+  clearInputs();
+  saveButton.classList.add('disable-save');
 }
 
 function render() {
@@ -63,7 +61,7 @@ function render() {
     }
 
     ideaBoard.innerHTML = markup;
-} 
+}
 
 function getImageSourceFromIdea(idea) {
   if (!idea.star) {
@@ -78,6 +76,13 @@ function clearInputs() {
   body.value = null;
 }
 
+
+function showSave () {
+  if (title.value && body.value) {
+    saveButton.classList.remove('disable-save');
+  }
+}
+
 function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
@@ -85,11 +90,9 @@ function favoriteIdea(event) {
     for (var i = 0; i < ideas.length; i++) {
       if (parseInt(ideaId) === ideas[i].id) {
         ideas[i].star = !ideas[i].star;
-        
       }
     }
     render();
-
   }
 }    
 
@@ -102,7 +105,6 @@ function deleteIdea(event) {
         ideas.splice(i, 1);
       }
     }
-  
     render();
   }
 }
