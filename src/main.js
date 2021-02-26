@@ -11,7 +11,7 @@ var saveButton = document.querySelector("#saveIdeaButton");
 var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
 var ideaBoard = document.querySelector("#ideaBoard");
-
+var toggleStarredIdeasButton = document.querySelector("#showIdeasButton");
 
 
 //**** Event Listeners ****
@@ -20,7 +20,7 @@ saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 ideaBoard.addEventListener("click", favoriteIdea); 
-
+toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 
 
 
@@ -107,4 +107,9 @@ function deleteIdea(event) {
     }
     render();
   }
+}
+
+
+function toggleStarredIdeas() {
+  console.log("hello");
 }
