@@ -1,6 +1,13 @@
 //****Global Variables ****
 var newIdea;
-var ideas = [];
+//each time page refreshes, need to check local storage to populate ideas array with anything that was stored in there
+var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+//ternary -- functions like an if statement. if (retrievedIdeas) is truthy and holds any value, then ideas is assigned to retrievedIdeas from local storage. if not, ideas is assigned to an empty array
+var ideas = (retrievedIdeas)
+// ? means if true then use retrievedIdeas
+  ? retrievedIdeas
+// : means if false, assign to empty array
+  : [];
 
 
 
@@ -19,7 +26,8 @@ ideaBoard.addEventListener("click", deleteIdea);
 saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
-ideaBoard.addEventListener("click", favoriteIdea); 
+ideaBoard.addEventListener("click", favoriteIdea);
+window.addEventListener("load", render);
 
 
 
@@ -32,6 +40,8 @@ function saveIdea(event) {
   }
   newIdea = new Idea(title.value, body.value);
   ideas.push(newIdea);
+  //store ideas array as a string in local storage
+  localStorage.setItem("ideas", JSON.stringify(ideas));
   render();
   clearInputs();
   saveButton.classList.add('disable-save');
@@ -39,9 +49,12 @@ function saveIdea(event) {
 
 function render() {
     var markup = "";
+    //get stringified ideas out of local storage and assign to variable retrievedIdeas
+    //need to do this each time we render in case there were any new saved ideas or deleted ideas during current browswer session
+    var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
 
     for (var i = 0; i < ideas.length; i++) {
-      var imageSource = getImageSourceFromIdea(ideas[i]); 
+      var imageSource = getImageSourceFromIdea(ideas[i]);
         markup += `
         <article class="idea" id="${ideas[i].id}">
           <div class="card-top-bar">
@@ -94,12 +107,12 @@ function favoriteIdea(event) {
     }
     render();
   }
-}    
+}
 
 function deleteIdea(event) {
   if (event.target.id === "deleteButton") {
     var ideaId = event.target.closest("article").id;
-    
+
     for (var i = 0; i < ideas.length; i++) {
       if (parseInt(ideaId) === ideas[i].id) {
         ideas.splice(i, 1);
