@@ -16,11 +16,7 @@ var ideaBoard = document.querySelector("#ideaBoard");
 
 
 //**** Event Listeners ****
-ideaBoard.addEventListener("click", function(event) {
-  if (event.target.id === "deleteButton") {
-    deleteIdea(event);
-  };
-});
+ideaBoard.addEventListener("click", deleteIdea);
 saveButton.addEventListener("click", saveIdea);
 ideaBoard.addEventListener("click", favoriteIdea); 
 
@@ -98,16 +94,15 @@ function favoriteIdea(event) {
 }    
 
 function deleteIdea(event) {
-  var ideaId = event.target.closest("article").id;
-
-  removeFromDataModel(ideaId);
-  render();
-}
-
-function removeFromDataModel(ideaId) {
-  for (var i = 0; i < ideas.length; i++) {
-    if (parseInt(ideaId) === ideas[i].id) {
-      ideas.splice(i, 1);
+  if (event.target.id === "deleteButton") {
+    var ideaId = event.target.closest("article").id;
+    
+    for (var i = 0; i < ideas.length; i++) {
+      if (parseInt(ideaId) === ideas[i].id) {
+        ideas.splice(i, 1);
+      }
     }
+  
+    render();
   }
 }
