@@ -20,13 +20,8 @@ ideaBoard.addEventListener("click", deleteIdea);
 saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
-searchBar.addEventListener("input", logData)
+searchBar.addEventListener("input", filterIdeas)
 ideaBoard.addEventListener("click", favoriteIdea); 
-
-function logData(event) {
-  console.log(event.target.value);
-
-}
 
 
 
@@ -39,12 +34,12 @@ function saveIdea(event) {
   }
   newIdea = new Idea(title.value, body.value);
   ideas.push(newIdea);
-  render();
+  render(ideas);
   clearInputs();
   saveButton.classList.add('disable-save');
 }
 
-function render() {
+function render(ideas) {
     var markup = "";
 
     for (var i = 0; i < ideas.length; i++) {
@@ -99,7 +94,7 @@ function favoriteIdea(event) {
         ideas[i].star = !ideas[i].star;
       }
     }
-    render();
+    render(ideas);
   }
 }    
 
@@ -112,7 +107,42 @@ function deleteIdea(event) {
         ideas.splice(i, 1);
       }
     }
-    render();
+    render(ideas);
   }
 }
 
+function filterIdeas() {
+  var searchQuery = searchBar.value.toLowerCase();
+  var matchingIdeas = [];
+
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].title.toLowerCase().includes(searchQuery) || ideas[i].body.toLowerCase().includes(searchQuery)) {
+      matchingIdeas.push(ideas[i]);
+    }
+  }
+  render(matchingIdeas);
+}
+
+// function renderQueriedIdeas(matchingIdeas) {
+//   var markup = "";
+//   var imageSource = getImageSourceFromIdea(ideas[i]);
+
+//   for (var i = 0; i < matchingIdeas.length; i++) {
+//     markup += `
+//         <article class="idea" id="${matchingIdeas[i].id}">
+//           <div class="card-top-bar">
+//             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
+//             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
+//           </div>
+//           <div class="card-text">
+//             <h3>${matchingIdeas[i].title}</h3>
+//             <p class="card-body">${matchingIdeas[i].body}</p>
+//           </div>
+//           <div class="card-bottom-bar">
+//             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
+//             Comment
+//           </div>
+//         </article>
+//         `;
+//   }
+// }
