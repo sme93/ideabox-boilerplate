@@ -6,8 +6,8 @@ class Idea  {
     this.star = false;
   }
   saveToStorage() {
-//saves to storage
-//an array and/or local storage?
+    ideas.push(newIdea);
+    localStorage.setItem("ideas", JSON.stringify(ideas));
   }
   deleteFromStorage() {
 
