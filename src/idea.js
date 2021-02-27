@@ -1,9 +1,9 @@
 class Idea  {
-  constructor(title, body) {
-    this.id = Date.now();
+  constructor(title, body, star, id) {
+    this.id = id;
     this.title = title;
     this.body = body;
-    this.star = false;
+    this.star = star;
     this.comments = [];
   }
   saveToStorage() {
