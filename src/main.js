@@ -29,6 +29,8 @@ saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 searchBar.addEventListener("input", filterIdeas);
+ideaBoard.addEventListener("click", favoriteIdea);
+
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", renderPage);
 
@@ -58,7 +60,7 @@ function renderPage() {
 
 function render(arrayToRender) {
     var markup = "";
-    
+
     for (var i = 0; i < arrayToRender.length; i++) {
       var imageSource = getImageSourceFromIdea(arrayToRender[i]);
         markup += `
@@ -124,6 +126,7 @@ function deleteIdea(event) {
         ideas.splice(i, 1);
       }
     }
+    localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
   }
 }
