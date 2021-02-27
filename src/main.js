@@ -29,7 +29,7 @@ saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 searchBar.addEventListener("input", filterIdeas);
-ideaBoard.addEventListener("click", favoriteIdea);
+ideaBoard.addEventListener("click", commentIdea);
 
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", render(retrievedIdeas));
@@ -67,6 +67,7 @@ function render(arrayToRender) {
           <div class="card-bottom-bar">
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
             Comment
+            <input class="comment-input inputs hidden" id="commentInput" type="text" name="comment" value="">
           </div>
         </article>
         `;
@@ -120,6 +121,13 @@ function deleteIdea(event) {
     }
     localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
+  }
+}
+
+function commentIdea(event) {
+  if (event.target.id === "commentButton") {
+    var commentInput = event.target.nextElementSibling;
+    commentInput.classList.remove("hidden");
   }
 }
 
