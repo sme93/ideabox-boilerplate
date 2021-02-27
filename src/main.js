@@ -43,9 +43,9 @@ function saveIdea(event) {
     return
   }
   newIdea = new Idea(title.value, body.value);
-  ideas.push(newIdea);
-  //store ideas array as a string in local storage
-  localStorage.setItem("ideas", JSON.stringify(ideas));
+  // ideas.push(newIdea);
+  // localStorage.setItem("ideas", JSON.stringify(ideas));
+  newIdea.saveToStorage();
   render(ideas);
   clearInputs();
   saveButton.classList.add('disable-save');
@@ -113,7 +113,7 @@ function favoriteIdea(event) {
         ideas[i].star = !ideas[i].star;
       }
     }
-    
+
     localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
   }
@@ -158,7 +158,7 @@ function filterIdeas() {
   // Get text in search box and convert to lowercase
   var searchQuery = searchBar.value.toLowerCase();
   var matchingIdeas = [];
-  
+
   // Loop through each idea currently in the data model
   for (var i = 0; i < ideas.length; i++) {
     // Compare each idea's title and body to see if they include the text currently in search box
