@@ -42,11 +42,25 @@ function saveIdea(event) {
   if (!title.value || !body.value) {
     return
   }
-  newIdea = new Idea(title.value, body.value);
+
+  newIdea = new Idea(title.value, body.value, false, Date.now());
+  // ideas.push(newIdea);
+  // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage();
   render(ideas);
   clearInputs();
   saveButton.classList.add('disable-save');
+}
+
+function renderPage() {
+  var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+
+  var retrievedIdeasAsInstances = [];
+  for (var i = 0; i < retrievedIdeas.length; i++) {
+    newIdea = new Idea(retrievedIdeas[i].title, retrievedIdeas[i].body, retrievedIdeas[i].star, retrievedIdeas[i].id);
+    retrievedIdeasAsInstances.push(newIdea);
+  }
+  render(retrievedIdeasAsInstances);
 }
 
 function render(arrayToRender) {
