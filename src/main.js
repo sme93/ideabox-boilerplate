@@ -32,7 +32,7 @@ searchBar.addEventListener("input", filterIdeas);
 ideaBoard.addEventListener("click", favoriteIdea);
 
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
-window.addEventListener("load", renderPage);
+window.addEventListener("load", render(retrievedIdeas));
 
 
 
@@ -43,19 +43,10 @@ function saveIdea(event) {
     return
   }
   newIdea = new Idea(title.value, body.value);
-  // ideas.push(newIdea);
-  // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage();
   render(ideas);
   clearInputs();
   saveButton.classList.add('disable-save');
-}
-
-function renderPage() {
-  //get stringified ideas out of local storage and assign to variable retrievedIdeas
-  //need to do this each time we render in case there were any new saved ideas or deleted ideas during current browswer session
-  var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-  render(retrievedIdeas);
 }
 
 function render(arrayToRender) {
@@ -113,7 +104,6 @@ function favoriteIdea(event) {
         ideas[i].star = !ideas[i].star;
       }
     }
-
     localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
   }
