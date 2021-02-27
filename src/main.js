@@ -113,8 +113,11 @@ function favoriteIdea(event) {
         ideas[i].star = !ideas[i].star;
       }
     }
+<<<<<<< HEAD
     
     localStorage.setItem("ideas", JSON.stringify(ideas));
+=======
+>>>>>>> main
     render(ideas);
   }
 }
