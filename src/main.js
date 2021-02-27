@@ -113,7 +113,6 @@ function favoriteIdea(event) {
         ideas[i].star = !ideas[i].star;
       }
     }
-    localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
   }
 }
