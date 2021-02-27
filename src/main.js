@@ -142,6 +142,15 @@ function commentIdea(event) {
   if (event.target.id === "commentButton") {
     var commentInput = event.target.nextElementSibling;
     commentInput.classList.remove("hidden");
+    var ideaId = event.target.closest("article").id;
+    var newComment = new Comment(ideaId, commentInput.value);
+
+    for (var i = 0; i < ideas.length; i++) {
+      if (parseInt(ideaId) === ideas[i].id) {
+        var instanceOfIdea = ideas[i];
+        instanceOfIdea.comments += newComment;
+      }
+    }
   }
 }
 
