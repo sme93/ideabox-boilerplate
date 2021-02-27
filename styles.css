@@ -247,4 +247,8 @@ main {
   background-color: #6F6FCA;
 }
 
+.hidden {
+  display: none!important;
+}
+
 /*  Riley's CSS end */
