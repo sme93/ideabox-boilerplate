@@ -17,19 +17,22 @@ var ideas = (retrievedIdeas)
 var saveButton = document.querySelector("#saveIdeaButton");
 var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
+var searchBar = document.querySelector("#searchInput");
 var ideaBoard = document.querySelector("#ideaBoard");
 var toggleStarredIdeasButton = document.querySelector("#showIdeasButton");
 
 
 //**** Event Listeners ****
 ideaBoard.addEventListener("click", deleteIdea);
+ideaBoard.addEventListener("click", favoriteIdea);
 saveButton.addEventListener("click", saveIdea);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
+searchBar.addEventListener("input", filterIdeas);
 ideaBoard.addEventListener("click", favoriteIdea);
+
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", renderPage);
-
 
 
 
@@ -128,7 +131,6 @@ function deleteIdea(event) {
   }
 }
 
-
 function toggleStarredIdeas(event) {
   if (event.srcElement.innerText === "Show Starred Ideas") {
     toggleStarredIdeasButton.innerHTML = "Show All Ideas";
@@ -137,4 +139,22 @@ function toggleStarredIdeas(event) {
     toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
     render(ideas);
   }
+}
+
+function filterIdeas() {
+  // Get text in search box and convert to lowercase
+  var searchQuery = searchBar.value.toLowerCase();
+  var matchingIdeas = [];
+  
+  // Loop through each idea currently in the data model
+  for (var i = 0; i < ideas.length; i++) {
+    // Compare each idea's title and body to see if they include the text currently in search box
+    // I'm converting all comparison values to lowercase so that search terms are not case-sensitive
+    if (ideas[i].title.toLowerCase().includes(searchQuery) || ideas[i].body.toLowerCase().includes(searchQuery)) {
+      // If an idea matches what is in the search box, add it to the "matchingIdeas" array
+      matchingIdeas.push(ideas[i]);
+    }
+  }
+  // Once the loop completes, render the matching ideas on the page
+  render(matchingIdeas);
 }
