@@ -134,9 +134,20 @@ function deleteIdea(event) {
 function toggleStarredIdeas(event) {
   if (event.srcElement.innerText === "Show Starred Ideas") {
     toggleStarredIdeasButton.innerHTML = "Show All Ideas";
-    render(ideas);
+    var starredIdeas = [];
+    //loop through each idea currently in data model
+    //if it has a star, add to starredIdeas
+    for (var i = 0; i < ideas.length; i++) {
+      if (ideas[i].star) {
+        starredIdeas.push(ideas[i]);
+      }
+    }
+    //add to favorited ideas array
+    //render favorited ideas
+    render(starredIdeas);
   } else {
     toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
+    //render all ideas to page
     render(ideas);
   }
 }
