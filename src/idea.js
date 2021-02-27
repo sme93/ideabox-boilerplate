@@ -4,7 +4,7 @@ class Idea  {
     this.title = title;
     this.body = body;
     this.star = false;
-    this.comment = [];
+    this.comments = [];
   }
   saveToStorage() {
 //saves to storage
