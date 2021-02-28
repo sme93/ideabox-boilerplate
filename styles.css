@@ -45,12 +45,10 @@ main {
 
 .title-input {
   height: 2rem;
-  margin-bottom: 1rem;
 }
 
 .body-input {
   height: 4rem;
-  margin-bottom: 1rem;
 }
 
 .add-search-forms {
@@ -63,7 +61,6 @@ main {
 .form {
   display: flex;
   flex-direction: column;
-  flex: 1;
   align-items: center;
  }
 
@@ -83,6 +80,11 @@ main {
   margin-bottom: .25rem;
 }
 
+.title-input,
+.body-input,
+.form {
+  margin-bottom: 1rem;
+}
 
 /* **********Search Bar********** */
 
@@ -108,11 +110,6 @@ main {
   color: #1F1F3D;
 }
 
-.search-button {
-  width: 20px;
-  height: 20px;
-}
-
 .search-icon {
   min-width: 2.35rem;
   min-height: 2.35rem;
@@ -120,7 +117,11 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.search-icon-svg {
+  width: 20px;
+  height: 20px;
 }
 
 /*  Sarah's CSS end */
