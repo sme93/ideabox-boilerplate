@@ -73,6 +73,17 @@ main {
   font-family: open sans, light;
 }
 
+@media screen and (max-width: 998px) {
+  .form input, 
+  .form label, 
+  .search, 
+  .body-input {
+    max-width: 75%;
+    min-width: 75%;
+  }
+}
+
+
 .form label {
   color: #1F1F3D;
   font-weight: bold;
