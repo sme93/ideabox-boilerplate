@@ -30,6 +30,7 @@ title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 searchBar.addEventListener("input", filterIdeas);
 ideaBoard.addEventListener("click", commentIdea);
+ideaBoard.addEventListener("click", addComment);
 
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", render(retrievedIdeas));
@@ -81,7 +82,11 @@ function render(arrayToRender) {
           <div class="card-bottom-bar">
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
             Comment
-            <input class="comment-input inputs hidden" id="commentInput" type="text" name="comment" value="">
+            <div class="hidden">
+              <input class="comment-input inputs" id="commentInput" type="text" name="comment" value="">
+              <button class="add-comment-button" id="addCommentButton">Add Comment</button>
+              <p class="comments-section" id="commentsSection">${arrayToRender[i].comments}</p>
+            </div>
           </div>
         </article>
         `;
@@ -140,8 +145,25 @@ function deleteIdea(event) {
 
 function commentIdea(event) {
   if (event.target.id === "commentButton") {
-    var commentInput = event.target.nextElementSibling;
-    commentInput.classList.remove("hidden");
+    var commentInputAndButton = event.target.nextElementSibling;
+    commentInputAndButton.classList.remove("hidden");
+  }
+}
+
+function addComment() {
+  if (event.target.id === "addCommentButton") {
+    var ideaId = event.target.closest("article").id;
+    var commentInput = event.target.previousElementSibling;
+    var newComment = new Comment(ideaId, commentInput.value);
+
+    for (var i = 0; i < ideas.length; i++) {
+      if (parseInt(ideaId) === ideas[i].id) {
+        ideas[i].comments += newComment.content;
+      }
+    }
+    localStorage.setItem("ideas", JSON.stringify(ideas));
+    render(ideas);
+    //comments not rendering on browser, but storing with correct instance of idea class
   }
 }
 
