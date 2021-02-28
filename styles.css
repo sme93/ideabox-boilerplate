@@ -67,7 +67,10 @@ main {
   align-items: center;
  }
 
-.form input, .form label, .search {
+.form input, 
+.form label, 
+.search, 
+.body-input {
   max-width: 40%;
   min-width: 40%;
   font-family: open sans, light;
@@ -117,6 +120,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 /*  Sarah's CSS end */
