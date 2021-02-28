@@ -1,11 +1,8 @@
 
 /* Shared CSS */
-html {
-  width: 100%;
-}
-
 body {
   min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   justify-content: center;
   font-family: 'Open Sans', sans-serif;
