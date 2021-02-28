@@ -25,6 +25,7 @@ class Idea  {
   }
   
   updateIdea() {
-
+    // set the value of this.star to the opposite of the value of this.star
+    this.star = !this.star;
   }
 }

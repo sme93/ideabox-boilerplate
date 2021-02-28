@@ -118,13 +118,11 @@ function showSave () {
 function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
-
     for (var i = 0; i < ideas.length; i++) {
       if (parseInt(ideaId) === ideas[i].id) {
-        ideas[i].star = !ideas[i].star;
+        ideas[i].updateIdea();
       }
     }
-    localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
   }
 }
