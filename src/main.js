@@ -1,13 +1,6 @@
 //****Global Variables ****
 var newIdea;
-//each time page refreshes, need to check local storage to populate ideas array with anything that was stored in there
-var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-//ternary -- functions like an if statement. if (retrievedIdeas) is truthy and holds any value, then ideas is assigned to retrievedIdeas from local storage. if not, ideas is assigned to an empty array
-var ideas = (retrievedIdeas)
-// ? means if true then use retrievedIdeas
-  ? retrievedIdeas
-// : means if false, assign to empty array
-  : [];
+var ideas = [];
 
 
 
@@ -33,7 +26,7 @@ ideaBoard.addEventListener("click", commentIdea);
 ideaBoard.addEventListener("click", addComment);
 
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
-window.addEventListener("load", render(retrievedIdeas));
+window.addEventListener("load", renderPage);
 
 
 
@@ -45,22 +38,24 @@ function saveIdea(event) {
   }
 
   newIdea = new Idea(title.value, body.value, false, Date.now());
-  // ideas.push(newIdea);
-  // localStorage.setItem("ideas", JSON.stringify(ideas));
-  newIdea.saveToStorage();
-  render(ideas);
+  
+  newIdea.saveToStorage(newIdea);
+  renderPage();
   clearInputs();
   saveButton.classList.add('disable-save');
 }
 
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-
+ 
   var retrievedIdeasAsInstances = [];
   for (var i = 0; i < retrievedIdeas.length; i++) {
     newIdea = new Idea(retrievedIdeas[i].title, retrievedIdeas[i].body, retrievedIdeas[i].star, retrievedIdeas[i].id);
     retrievedIdeasAsInstances.push(newIdea);
+    ideas.push(newIdea);
   }
+  console.log(retrievedIdeasAsInstances);
+  console.log(ideas);
   render(retrievedIdeasAsInstances);
 }
 
@@ -118,12 +113,13 @@ function showSave () {
 function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
-    for (var i = 0; i < ideas.length; i++) {
-      if (parseInt(ideaId) === ideas[i].id) {
-        ideas[i].updateIdea();
-      }
-    }
-    render(ideas);
+    // for (var i = 0; i < ideas.length; i++) {
+    //   if (parseInt(ideaId) === ideas[i].id) {
+    //     ideas[i].updateIdea();
+    //   }
+    // }
+    console.log(ideas);
+    renderPage();
   }
 }
 
@@ -182,7 +178,7 @@ function toggleStarredIdeas(event) {
   } else {
     toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
     //render all ideas to page
-    render(ideas);
+    renderPage;
   }
 }
 

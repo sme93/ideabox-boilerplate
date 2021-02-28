@@ -6,10 +6,15 @@ class Idea  {
     this.star = star;
     this.comments = [];
   }
-  saveToStorage() {
-    ideas.push(newIdea);
-    localStorage.setItem("ideas", JSON.stringify(ideas));
+  saveToStorage(idea) {
+    var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+    if (!retrievedIdeas) {
+      retrievedIdeas = [];
+    } 
+    retrievedIdeas.push(idea);
+    localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
+
   deleteFromStorage() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
