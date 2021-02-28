@@ -40,23 +40,21 @@ function saveIdea(event) {
   newIdea = new Idea(title.value, body.value, false, Date.now());
   
   newIdea.saveToStorage(newIdea);
-  renderPage();
+  ideas.push(newIdea);
+  render(ideas);
   clearInputs();
   saveButton.classList.add('disable-save');
 }
 
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
- 
-  var retrievedIdeasAsInstances = [];
+  
   for (var i = 0; i < retrievedIdeas.length; i++) {
     newIdea = new Idea(retrievedIdeas[i].title, retrievedIdeas[i].body, retrievedIdeas[i].star, retrievedIdeas[i].id);
-    retrievedIdeasAsInstances.push(newIdea);
     ideas.push(newIdea);
   }
-  console.log(retrievedIdeasAsInstances);
-  console.log(ideas);
-  render(retrievedIdeasAsInstances);
+  
+  render(ideas);
 }
 
 function render(arrayToRender) {
@@ -65,7 +63,7 @@ function render(arrayToRender) {
     for (var i = 0; i < arrayToRender.length; i++) {
       var imageSource = getImageSourceFromIdea(arrayToRender[i]);
         markup += `
-        <article class="idea" id="${arrayToRender[i].id}">
+        <article class="idea" id="${i}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
@@ -113,26 +111,20 @@ function showSave () {
 function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
-    // for (var i = 0; i < ideas.length; i++) {
-    //   if (parseInt(ideaId) === ideas[i].id) {
-    //     ideas[i].updateIdea();
-    //   }
-    // }
-    console.log(ideas);
-    renderPage();
+
+    ideas[ideaId].updateIdea();
+    //ideas[ideaId].saveToStorage(ideas[ideaId]);
+    render(ideas);
   }
 }
 
 function deleteIdea(event) {
   if (event.target.id === "deleteButton") {
     var ideaId = event.target.closest("article").id;
-
-    for (var i = 0; i < ideas.length; i++) {
-      if (parseInt(ideaId) === ideas[i].id) {
-        ideas.splice(i, 1);
-      }
-    }
-    localStorage.setItem("ideas", JSON.stringify(ideas));
+    
+    ideas[ideaId].deleteFromStorage();
+    ideas.splice(ideaId, 1); 
+    
     render(ideas);
   }
 }
@@ -178,7 +170,7 @@ function toggleStarredIdeas(event) {
   } else {
     toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
     //render all ideas to page
-    renderPage;
+    render(ideas);
   }
 }
 

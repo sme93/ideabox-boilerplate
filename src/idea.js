@@ -30,7 +30,18 @@ class Idea  {
   }
   
   updateIdea() {
-    // set the value of this.star to the opposite of the value of this.star
-    this.star = !this.star;
+    var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
+    if (!retrievedIdeas) {
+      return;
+    }
+    
+    for (var i = 0; i < retrievedIdeas.length; i++) {
+      if (this.id === retrievedIdeas[i].id) {
+        this.star = !this.star;
+        retrievedIdeas[i].star = this.star;
+        // set the value of this.star to the opposite of the value of this.star
+      }
+    }
+    localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
 }
