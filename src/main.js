@@ -6,6 +6,7 @@ var ideas = [];
 
 
 
+
 // **** querySelectors ****
 var saveButton = document.querySelector("#saveIdeaButton");
 var title = document.querySelector("#titleInput");
@@ -38,8 +39,9 @@ function saveIdea(event) {
   }
 
   newIdea = new Idea(title.value, body.value, false, Date.now());
-
-  newIdea.saveToStorage(newIdea);
+  // ideas.push(newIdea);
+  // render(ideas);
+  newIdea.saveToStorage();
   ideas.push(newIdea);
   render(ideas);
   clearInputs();
@@ -47,13 +49,14 @@ function saveIdea(event) {
 }
 
 function renderPage() {
-  var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-
-  for (var i = 0; i < retrievedIdeas.length; i++) {
-    newIdea = new Idea(retrievedIdeas[i].title, retrievedIdeas[i].body, retrievedIdeas[i].star, retrievedIdeas[i].id);
-    ideas.push(newIdea);
+  var storedIdeas = JSON.parse(localStorage.getItem("ideas"));
+  if (storedIdeas) {
+    for (var i = 0; i < storedIdeas.length; i++) {
+      newIdea = new Idea(storedIdeas[i].title, storedIdeas[i].body, storedIdeas[i].star, storedIdeas[i].id);
+      ideas.push(newIdea);
+    }
   }
-
+  localStorage.setItem("ideas", JSON.stringify(ideas));
   render(ideas);
 }
 
@@ -115,7 +118,7 @@ function favoriteIdea(event) {
   for (var i = 0; i < ideas.length; i++) {
     if (parseInt(ideaId) === ideas[i].id) {
       ideas[i].updateIdea();
-      ideas[i].saveToStorage(ideas[i]);
+      ideas[i].saveToStorage();
     }
   }
     render(ideas);
@@ -126,8 +129,12 @@ function deleteIdea(event) {
   if (event.target.id === "deleteButton") {
     var ideaId = event.target.closest("article").id;
 
-    ideas[ideaId].deleteFromStorage();
-    ideas.splice(ideaId, 1);
+    for (var i = 0; i < ideas.length; i++) {
+      if (parseInt(ideaId) === ideas[i].id) {
+        ideas[i].deleteFromStorage();
+        ideas.splice(i, 1);
+      }
+    }
 
     render(ideas);
   }

@@ -8,31 +8,32 @@ class Idea  {
   }
   saveToStorage() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-    if (!retrievedIdeas) {
-      retrievedIdeas = [];
-      retrievedIdeas.push(this);
-    } else {
+    if (retrievedIdeas.length) {
       for (var i = 0; i < retrievedIdeas.length; i++) {
         if (retrievedIdeas[i].id === this.id) {
           retrievedIdeas[i] = this;
+          localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
+          return
         }
       }
+      retrievedIdeas.push(this);
+    } else {
+      retrievedIdeas.push(this);
     }
-    localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
+      localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
 
   deleteFromStorage() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
       return;
-    }
-
-    for (var i = 0; i < retrievedIdeas.length; i++) {
-      if (this.id === retrievedIdeas[i].id) {
+    } else {
+      for (var i = 0; i < retrievedIdeas; i++) {
         retrievedIdeas.splice(i, 1);
+
+        localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
       }
     }
-    localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
 
   updateIdea() {
