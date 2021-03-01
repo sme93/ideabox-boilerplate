@@ -159,14 +159,12 @@ main {
   margin: 0;
 }
 
-
 .idea-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
-
+  place-items: center;
+  place-content: space-evenly;
   background-color: #EAEAF4;
-
   font-family: open sans, light;
 }
 
@@ -178,7 +176,7 @@ main {
   height: 20vw;
   min-width: 200px;
   min-height: 200px;
-  margin: 1vw;
+  margin: 2vw;
   border: solid 1px;
   border-color: #1F1F3D;
   background-color: #FFFFFF;
