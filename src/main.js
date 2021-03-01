@@ -63,7 +63,7 @@ function render(arrayToRender) {
     for (var i = 0; i < arrayToRender.length; i++) {
       var imageSource = getImageSourceFromIdea(arrayToRender[i]);
         markup += `
-        <article class="idea" id="${i}">
+        <article class="idea" id="${arrayToRender[i].id}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
@@ -112,8 +112,12 @@ function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
 
-    ideas[ideaId].updateIdea();
-    //ideas[ideaId].saveToStorage(ideas[ideaId]);
+  for (var i = 0; i < ideas.length; i++) {
+    if (parseInt(ideaId) === ideas[i].id) {
+      ideas[i].updateIdea();
+      ideas[i].saveToStorage(ideas[i]);
+    }
+  }
     render(ideas);
   }
 }
@@ -136,20 +140,22 @@ function commentIdea(event) {
   }
 }
 
-function addComment() {
+function addComment(event) {
   if (event.target.id === "addCommentButton") {
     var ideaId = event.target.closest("article").id;
     var commentInput = event.target.previousElementSibling;
     var newComment = new Comment(ideaId, commentInput.value);
+    // need to add comment to an array stored in comment class?
 
-    for (var i = 0; i < ideas.length; i++) {
-          console.log("ideas index", ideas[i]);
-      if (parseInt(ideaId) === ideas.indexOf(ideas[i])) {
-        ideas[i].comments.push(newComment.content);
-      }
-    }
+    ideas[ideaId].saveToStorage();
 
-    localStorage.setItem("ideas", JSON.stringify(ideas));
+    // for (var i = 0; i < ideas.length; i++) {
+    //       console.log("ideas index", ideas[i]);
+    //   if (parseInt(ideaId) === ideas.indexOf(ideas[i])) {
+    //     ideas[i].comments.push(newComment.content);
+    //   }
+    // }
+
     render(ideas);
     //comments not rendering on browser, but storing with correct instance of idea class
   }
