@@ -1,13 +1,6 @@
 //****Global Variables ****
 var newIdea;
-//each time page refreshes, need to check local storage to populate ideas array with anything that was stored in there
-var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-//ternary -- functions like an if statement. if (retrievedIdeas) is truthy and holds any value, then ideas is assigned to retrievedIdeas from local storage. if not, ideas is assigned to an empty array
-var ideas = (retrievedIdeas)
-// ? means if true then use retrievedIdeas
-  ? retrievedIdeas
-// : means if false, assign to empty array
-  : [];
+var ideas = [];
 
 
 
@@ -33,7 +26,7 @@ ideaBoard.addEventListener("click", commentIdea);
 ideaBoard.addEventListener("click", addComment);
 
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
-window.addEventListener("load", render(retrievedIdeas));
+window.addEventListener("load", renderPage);
 
 
 
@@ -45,9 +38,9 @@ function saveIdea(event) {
   }
 
   newIdea = new Idea(title.value, body.value, false, Date.now());
-  // ideas.push(newIdea);
-  // localStorage.setItem("ideas", JSON.stringify(ideas));
-  newIdea.saveToStorage();
+  
+  newIdea.saveToStorage(newIdea);
+  ideas.push(newIdea);
   render(ideas);
   clearInputs();
   saveButton.classList.add('disable-save');
@@ -55,13 +48,13 @@ function saveIdea(event) {
 
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-
-  var retrievedIdeasAsInstances = [];
+  
   for (var i = 0; i < retrievedIdeas.length; i++) {
     newIdea = new Idea(retrievedIdeas[i].title, retrievedIdeas[i].body, retrievedIdeas[i].star, retrievedIdeas[i].id);
-    retrievedIdeasAsInstances.push(newIdea);
+    ideas.push(newIdea);
   }
-  render(retrievedIdeasAsInstances);
+  
+  render(ideas);
 }
 
 function render(arrayToRender) {
@@ -70,7 +63,7 @@ function render(arrayToRender) {
     for (var i = 0; i < arrayToRender.length; i++) {
       var imageSource = getImageSourceFromIdea(arrayToRender[i]);
         markup += `
-        <article class="idea" id="${arrayToRender[i].id}">
+        <article class="idea" id="${i}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
             <input type="image" class="card-top-button" id="deleteButton" alt="Delete card" src="./images/delete.svg">
@@ -119,12 +112,8 @@ function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
     var ideaId = event.target.closest("article").id;
 
-    for (var i = 0; i < ideas.length; i++) {
-      if (parseInt(ideaId) === ideas[i].id) {
-        ideas[i].star = !ideas[i].star;
-      }
-    }
-    localStorage.setItem("ideas", JSON.stringify(ideas));
+    ideas[ideaId].updateIdea();
+    //ideas[ideaId].saveToStorage(ideas[ideaId]);
     render(ideas);
   }
 }
@@ -132,13 +121,10 @@ function favoriteIdea(event) {
 function deleteIdea(event) {
   if (event.target.id === "deleteButton") {
     var ideaId = event.target.closest("article").id;
-
-    for (var i = 0; i < ideas.length; i++) {
-      if (parseInt(ideaId) === ideas[i].id) {
-        ideas.splice(i, 1);
-      }
-    }
-    localStorage.setItem("ideas", JSON.stringify(ideas));
+    
+    ideas[ideaId].deleteFromStorage();
+    ideas.splice(ideaId, 1); 
+    
     render(ideas);
   }
 }
