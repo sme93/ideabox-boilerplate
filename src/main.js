@@ -4,9 +4,6 @@ var ideas = [];
 
 
 
-
-
-
 // **** querySelectors ****
 var saveButton = document.querySelector("#saveIdeaButton");
 var title = document.querySelector("#titleInput");
@@ -39,8 +36,7 @@ function saveIdea(event) {
   }
 
   newIdea = new Idea(title.value, body.value, false, Date.now());
-  // ideas.push(newIdea);
-  // render(ideas);
+
   newIdea.saveToStorage();
   ideas.push(newIdea);
   render(ideas);
@@ -49,9 +45,11 @@ function saveIdea(event) {
 }
 
 function renderPage() {
+  //handles error on load for null array
   var storedIdeas = JSON.parse(localStorage.getItem("ideas"));
   if (storedIdeas) {
     for (var i = 0; i < storedIdeas.length; i++) {
+      //returns array as an array of instances of the idea class
       newIdea = new Idea(storedIdeas[i].title, storedIdeas[i].body, storedIdeas[i].star, storedIdeas[i].id);
       ideas.push(newIdea);
     }
@@ -153,14 +151,9 @@ function addComment(event) {
     var newComment = new Comment(ideaId, commentInput.value);
     // need to add comment to an array stored in comment class?
 
+
     ideas[ideaId].saveToStorage();
 
-    // for (var i = 0; i < ideas.length; i++) {
-    //       console.log("ideas index", ideas[i]);
-    //   if (parseInt(ideaId) === ideas.indexOf(ideas[i])) {
-    //     ideas[i].comments.push(newComment.content);
-    //   }
-    // }
 
     render(ideas);
     //comments not rendering on browser, but storing with correct instance of idea class
