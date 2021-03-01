@@ -178,6 +178,7 @@ main {
 .idea-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
   background-color: #EAEAF4;
   font-family: open sans, light;
 }

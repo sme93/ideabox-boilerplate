@@ -76,7 +76,7 @@ function render(arrayToRender) {
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
             Comment
             <div class="hidden">
-              <input class="comment-input inputs" id="commentInput" type="text" name="comment" value="">
+              <input class="comment-input inputs type="text" name="comment" value="">
               <button class="add-comment-button" id="addCommentButton">Add Comment</button>
               <p class="comments-section" id="commentsSection">${arrayToRender[i].comments}</p>
             </div>
@@ -175,19 +175,13 @@ function toggleStarredIdeas(event) {
 }
 
 function filterIdeas() {
-  // Get text in search box and convert to lowercase
   var searchQuery = searchBar.value.toLowerCase();
   var matchingIdeas = [];
 
-  // Loop through each idea currently in the data model
   for (var i = 0; i < ideas.length; i++) {
-    // Compare each idea's title and body to see if they include the text currently in search box
-    // I'm converting all comparison values to lowercase so that search terms are not case-sensitive
     if (ideas[i].title.toLowerCase().includes(searchQuery) || ideas[i].body.toLowerCase().includes(searchQuery)) {
-      // If an idea matches what is in the search box, add it to the "matchingIdeas" array
       matchingIdeas.push(ideas[i]);
     }
   }
-  // Once the loop completes, render the matching ideas on the page
   render(matchingIdeas);
 }
