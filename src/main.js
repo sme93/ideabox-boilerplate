@@ -38,7 +38,7 @@ function saveIdea(event) {
   }
 
   newIdea = new Idea(title.value, body.value, false, Date.now());
-  
+
   newIdea.saveToStorage(newIdea);
   ideas.push(newIdea);
   render(ideas);
@@ -48,12 +48,12 @@ function saveIdea(event) {
 
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-  
+
   for (var i = 0; i < retrievedIdeas.length; i++) {
     newIdea = new Idea(retrievedIdeas[i].title, retrievedIdeas[i].body, retrievedIdeas[i].star, retrievedIdeas[i].id);
     ideas.push(newIdea);
   }
-  
+
   render(ideas);
 }
 
@@ -71,6 +71,7 @@ function render(arrayToRender) {
           <div class="card-text">
             <h3>${arrayToRender[i].title}</h3>
             <p class="card-body">${arrayToRender[i].body}</p>
+            <p class="comments-section" id="commentsSection">Comments: ${arrayToRender[i].comments}</p>
           </div>
           <div class="card-bottom-bar">
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
@@ -78,7 +79,6 @@ function render(arrayToRender) {
             <div class="hidden">
               <input class="comment-input inputs" id="commentInput" type="text" name="comment" value="">
               <button class="add-comment-button" id="addCommentButton">Add Comment</button>
-              <p class="comments-section" id="commentsSection">${arrayToRender[i].comments}</p>
             </div>
           </div>
         </article>
@@ -121,10 +121,10 @@ function favoriteIdea(event) {
 function deleteIdea(event) {
   if (event.target.id === "deleteButton") {
     var ideaId = event.target.closest("article").id;
-    
+
     ideas[ideaId].deleteFromStorage();
-    ideas.splice(ideaId, 1); 
-    
+    ideas.splice(ideaId, 1);
+
     render(ideas);
   }
 }
@@ -143,10 +143,12 @@ function addComment() {
     var newComment = new Comment(ideaId, commentInput.value);
 
     for (var i = 0; i < ideas.length; i++) {
-      if (parseInt(ideaId) === ideas[i].id) {
-        ideas[i].comments += newComment.content;
+          console.log("ideas index", ideas[i]);
+      if (parseInt(ideaId) === ideas.indexOf(ideas[i])) {
+        ideas[i].comments.push(newComment.content);
       }
     }
+
     localStorage.setItem("ideas", JSON.stringify(ideas));
     render(ideas);
     //comments not rendering on browser, but storing with correct instance of idea class

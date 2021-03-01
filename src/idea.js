@@ -10,7 +10,7 @@ class Idea  {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
       retrievedIdeas = [];
-    } 
+    }
     retrievedIdeas.push(idea);
     localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
@@ -19,7 +19,7 @@ class Idea  {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
       return;
-    } 
+    }
 
     for (var i = 0; i < retrievedIdeas.length; i++) {
       if (this.id === retrievedIdeas[i].id) {
@@ -28,13 +28,13 @@ class Idea  {
     }
     localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
-  
+
   updateIdea() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
       return;
     }
-    
+
     for (var i = 0; i < retrievedIdeas.length; i++) {
       if (this.id === retrievedIdeas[i].id) {
         this.star = !this.star;

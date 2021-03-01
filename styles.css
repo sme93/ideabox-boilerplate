@@ -64,9 +64,9 @@ main {
   align-items: center;
  }
 
-.form input, 
-.form label, 
-.search, 
+.form input,
+.form label,
+.search,
 .body-input {
   max-width: 40%;
   min-width: 40%;
@@ -74,9 +74,9 @@ main {
 }
 
 @media screen and (max-width: 998px) {
-  .form input, 
-  .form label, 
-  .search, 
+  .form input,
+  .form label,
+  .search,
   .body-input {
     max-width: 75%;
     min-width: 75%;
@@ -242,6 +242,7 @@ main {
 
 .card-body {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .card-bottom-bar {
@@ -258,9 +259,15 @@ main {
     min-width: 25px;
 }
 
+.comments-section {
+  display: flex;
+  color: #1F1F3D;
+}
+
 .disable-save {
   cursor: not-allowed;
   background-color: #6F6FCA;
+  min-height: 25px;
 }
 
 .hidden {
