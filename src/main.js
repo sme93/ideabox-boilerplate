@@ -135,7 +135,6 @@ function deleteIdea(event) {
         ideas.splice(i, 1);
       }
     }
-
     render(ideas);
   }
 }

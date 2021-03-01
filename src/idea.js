@@ -28,10 +28,13 @@ class Idea  {
     if (!retrievedIdeas) {
       return;
     } else {
-      for (var i = 0; i < retrievedIdeas; i++) {
-        retrievedIdeas.splice(i, 1);
-
-        localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
+      for (var i = 0; i < retrievedIdeas.length; i++) {
+        if (retrievedIdeas[i].id === this.id) {
+          console.log(retrievedIdeas);
+          retrievedIdeas.splice(i, 1);
+          console.log(retrievedIdeas);
+          localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
+        }
       }
     }
   }
