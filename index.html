@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IdeaBox</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./styles.css">
@@ -19,13 +22,13 @@
           <label for="title">Title</label>
           <input class="title-input inputs" id="titleInput" type="text" name="title" value="">
           <label for="body">Body</label>
-          <input class="body-input inputs" id="bodyInput" type="text" name="body" value="">
+          <textarea class="body-input inputs" id="bodyInput" type="text" name="body" value=""></textarea>
           <input class="button inputs disable-save" id="saveIdeaButton" type="submit" name="save" value="Save">
         </form>
           <div class="search">
             <form class="inputs">
               <div class="search-icon">
-                <input class="search-button" type="image"alt="Search icon" src="./images/search.svg">
+                <img class="search-icon-svg" alt="Search icon" src="./images/search.svg">
               </div>
               <input class="search-term" id="searchInput" type="text" placeholder="Search Ideas">
             </form>
