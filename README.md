@@ -2,15 +2,15 @@
 
 ## Description
 
-Ever have a billion dollar idea that you're confident you'll remember but end up completely forgetting about, waking up 30 years later wondering what the hell happened? Maybe if you'd had a quick and easy way of jotting that idea down, you'd be yachting it up on the French Riviera and Denice wouldn't have left with the kids.
+Ever have a billion dollar idea that you're confident you'll remember but end up completely forgetting, waking up 30 years later wondering what the hell happened? Maybe if you'd had a quick and easy way of jotting that idea down, you'd be yachting it up on the French Riviera and Denice wouldn't have left with the kids.
 
 IdeaBox is a web application that enables users to record, keep track of, and organize their original thoughts and schemes small and large. Designed with persistence in mind, IdeaBox utilizes local storage to ensure that your genius idea of opening up a summer camp for cats is never forgotten (ever). 
 
 ### Notable features
-* Favoriting ideas
-* Filtering ideas
-* Commenting on ideas
-* Deleting saved ideas (but never the cat summer camp, never)
+* Users can favorite any ideas that they save
+* Filtering can be used to query for specific or favorited ideas
+* Comments can be added to ideas to provide more context
+* Ideas can be deleted if desired (but not the cat summer camp, never)
 
 ### Deployed At
 * https://sme93.github.io/ideabox-boilerplate/
@@ -21,6 +21,13 @@ IdeaBox is a web application that enables users to record, keep track of, and or
 2. Clone down to your machine
 3. Access cloned directory
 4. Run `index.html`
+
+## Walkthrough
+1. To add a new idea, enter the appropriate text into the "Title" and "Body" fields and select "Save"
+2. Once an idea is added, it can be favorited by selecting the "Favorite" icon at the top left of the idea. Onced favorited, the icon will appear filled in. 
+3. To display only favorited ideas, select the "Show Starred Ideas" button. Once selected, the button will then display "Show All Ideas". Select it again to display all ideas once again.
+4. If deemed necessary, an idea can be deleted by selecting the "Delete" icon at the top right of the idea. This removes the idea from both the page and from local storage.
+5. The search bar can be used to filter what ideas display by the text in their Title or Body.
 
 ## Authors
 <table>
