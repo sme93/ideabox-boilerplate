@@ -7,17 +7,18 @@ var searchBar = document.querySelector("#searchInput");
 var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
 
+window.addEventListener("load", renderPage);
+searchBar.addEventListener("input", filterIdeas);
+title.addEventListener("input", showSave);
+body.addEventListener("input", showSave);
 saveButton.addEventListener("click", saveIdea);
+toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 ideaBoard.addEventListener("click", function(event) {
   if (event.target.id === "favoriteButton") { favoriteIdea(event) }
   if (event.target.id === "commentButton") { commentIdea(event) }
   if (event.target.id === "addCommentButton") { addComment(event) } 
-  if (event.target.id === "deleteButton") { deleteIdea(event) } });
-toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
-searchBar.addEventListener("input", filterIdeas);
-title.addEventListener("input", showSave);
-body.addEventListener("input", showSave);
-window.addEventListener("load", renderPage);
+  if (event.target.id === "deleteButton") { deleteIdea(event) } 
+});
 
 function saveIdea(event) {
   event.preventDefault();
@@ -118,11 +119,27 @@ function renderPage() {
   render(ideas);
 }
 
+function getImageSourceFromIdea(idea) {
+  if (!idea.star) {
+    return "./images/star.svg";
+  } else {
+    return "./images/star-active.svg";
+  }
+}
+
+function formatComments(commentArray) {
+  var commentMarkup = "";
+  for (var i = 0; i < commentArray.length; i++) {
+    commentMarkup += `<li>${commentArray[i].content}</li>`
+  }
+  return commentMarkup;
+}
+
 function render(arrayToRender) {
-    var markup = "";
-    for (var i = 0; i < arrayToRender.length; i++) {
-      var imageSource = getImageSourceFromIdea(arrayToRender[i]);
-        markup += `
+  var markup = "";
+  for (var i = 0; i < arrayToRender.length; i++) {
+    var imageSource = getImageSourceFromIdea(arrayToRender[i]);
+    markup += `
         <article class="idea" id="${i}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
@@ -148,22 +165,6 @@ function render(arrayToRender) {
           </div>
         </article>
         `;
-    }
-    ideaBoard.innerHTML = markup;
-}
-
-function getImageSourceFromIdea(idea) {
-  if (!idea.star) {
-    return "./images/star.svg";
-  } else {
-    return "./images/star-active.svg";
   }
-}
-
-function formatComments(commentArray) {
-  var commentMarkup = "";
-  for (var i = 0; i < commentArray.length; i++) {
-    commentMarkup += `<li>${commentArray[i].content}</li>`
-  }
-  return commentMarkup;
+  ideaBoard.innerHTML = markup;
 }
