@@ -1,4 +1,3 @@
-var newIdea;
 var ideas = [];
 
 var saveButton = document.querySelector("#saveIdeaButton");
@@ -8,24 +7,25 @@ var searchBar = document.querySelector("#searchInput");
 var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
 
+window.addEventListener("load", renderPage);
+searchBar.addEventListener("input", filterIdeas);
+title.addEventListener("input", showSave);
+body.addEventListener("input", showSave);
 saveButton.addEventListener("click", saveIdea);
+toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 ideaBoard.addEventListener("click", function(event) {
   if (event.target.id === "favoriteButton") { favoriteIdea(event) }
   if (event.target.id === "commentButton") { commentIdea(event) }
   if (event.target.id === "addCommentButton") { addComment(event) } 
-  if (event.target.id === "deleteButton") { deleteIdea(event) } });
-toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
-searchBar.addEventListener("input", filterIdeas);
-title.addEventListener("input", showSave);
-body.addEventListener("input", showSave);
-window.addEventListener("load", renderPage);
+  if (event.target.id === "deleteButton") { deleteIdea(event) } 
+});
 
 function saveIdea(event) {
   event.preventDefault();
   if (!title.value || !body.value) {
     return
   }
-  newIdea = new Idea(title.value, body.value, false, Date.now());
+  var newIdea = new Idea(title.value, body.value, false, Date.now());
   newIdea.saveToStorage(newIdea);
   ideas.push(newIdea);
   render(ideas);
@@ -97,29 +97,49 @@ function showSave () {
   }
 }
 
+function getCommentsFromIdea(ideaComments) {
+  var comments = [];
+  for (var i = 0; i < ideaComments.length; i++) {
+    var comment = new Comment(ideaComments[i].ideaId, ideaComments[i].content)
+    comments.push(comment);
+  }
+  return comments;
+}
+
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
   if (retrievedIdeas) {
     for (var i = 0; i < retrievedIdeas.length; i++) {
       var currentIdea = retrievedIdeas[i];
-      var storedComments = [];
-      var currentIdeasComments = currentIdea.comments;
-      for (var k = 0; k < currentIdeasComments.length; k++) {
-        var comment = new Comment(currentIdeasComments[k].ideaId, currentIdeasComments[k].content)
-        storedComments.push(comment);
-      }
-      newIdea = new Idea(currentIdea.title, currentIdea.body, currentIdea.star, currentIdea.id, storedComments);
+      var storedComments = getCommentsFromIdea(currentIdea.comments);
+      var newIdea = new Idea(currentIdea.title, currentIdea.body, currentIdea.star, currentIdea.id, storedComments);
       ideas.push(newIdea);
     }
   }
   render(ideas);
 }
 
+function getImageSourceFromIdea(idea) {
+  if (!idea.star) {
+    return "./images/star.svg";
+  } else {
+    return "./images/star-active.svg";
+  }
+}
+
+function formatComments(commentArray) {
+  var commentMarkup = "";
+  for (var i = 0; i < commentArray.length; i++) {
+    commentMarkup += `<li>${commentArray[i].content}</li>`
+  }
+  return commentMarkup;
+}
+
 function render(arrayToRender) {
-    var markup = "";
-    for (var i = 0; i < arrayToRender.length; i++) {
-      var imageSource = getImageSourceFromIdea(arrayToRender[i]);
-        markup += `
+  var markup = "";
+  for (var i = 0; i < arrayToRender.length; i++) {
+    var imageSource = getImageSourceFromIdea(arrayToRender[i]);
+    markup += `
         <article class="idea" id="${i}">
           <div class="card-top-bar">
             <input type="image" class="card-top-button" id="favoriteButton" alt="Star favorite" src=${imageSource}>
@@ -145,22 +165,6 @@ function render(arrayToRender) {
           </div>
         </article>
         `;
-    }
-    ideaBoard.innerHTML = markup;
-}
-
-function getImageSourceFromIdea(idea) {
-  if (!idea.star) {
-    return "./images/star.svg";
-  } else {
-    return "./images/star-active.svg";
   }
-}
-
-function formatComments(commentArray) {
-  var commentMarkup = "";
-  for (var i = 0; i < commentArray.length; i++) {
-    commentMarkup += `<li>${commentArray[i].content}</li>`
-  }
-  return commentMarkup;
+  ideaBoard.innerHTML = markup;
 }

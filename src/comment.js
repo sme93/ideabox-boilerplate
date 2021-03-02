@@ -13,8 +13,4 @@ class Comment {
       }
       localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
     }
-
-    deleteFromStorage() {
-        
-    }
 }
