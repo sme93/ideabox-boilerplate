@@ -1,8 +1,6 @@
-//****Global Variables ****
 var newIdea;
 var ideas = [];
 
-// **** querySelectors ****
 var saveButton = document.querySelector("#saveIdeaButton");
 var ideaBoard = document.querySelector("#ideaBoard");
 var toggleStarredIdeasButton = document.querySelector("#showIdeasButton");
@@ -10,7 +8,6 @@ var searchBar = document.querySelector("#searchInput");
 var title = document.querySelector("#titleInput");
 var body = document.querySelector("#bodyInput");
 
-//**** Event Listeners ****
 saveButton.addEventListener("click", saveIdea);
 ideaBoard.addEventListener("click", function(event) {
   if (event.target.id === "favoriteButton") { favoriteIdea(event) }
@@ -23,7 +20,6 @@ title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
 window.addEventListener("load", renderPage);
 
-//**** Functions ****
 function saveIdea(event) {
   event.preventDefault();
   if (!title.value || !body.value) {
@@ -34,7 +30,7 @@ function saveIdea(event) {
   ideas.push(newIdea);
   render(ideas);
   clearInputs();
-  saveButton.classList.add('disable-save');
+  saveButton.classList.add("disable-save");
 }
 
 function clearInputs() {
@@ -72,19 +68,14 @@ function toggleStarredIdeas(event) {
   if (event.srcElement.innerText === "Show Starred Ideas") {
     toggleStarredIdeasButton.innerHTML = "Show All Ideas";
     var starredIdeas = [];
-    //loop through each idea currently in data model
-    //if it has a star, add to starredIdeas
     for (var i = 0; i < ideas.length; i++) {
       if (ideas[i].star) {
         starredIdeas.push(ideas[i]);
       }
     }
-    //add to favorited ideas array
-    //render favorited ideas
     render(starredIdeas);
   } else {
     toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
-    //render all ideas to page
     render(ideas);
   }
 }
@@ -102,7 +93,7 @@ function filterIdeas() {
 
 function showSave () {
   if (title.value && body.value) {
-    saveButton.classList.remove('disable-save');
+    saveButton.classList.remove("disable-save");
   }
 }
 
@@ -160,9 +151,9 @@ function render(arrayToRender) {
 
 function getImageSourceFromIdea(idea) {
   if (!idea.star) {
-    return "./images/star.svg"
+    return "./images/star.svg";
   } else {
-    return "./images/star-active.svg"
+    return "./images/star-active.svg";
   }
 }
 
@@ -171,5 +162,5 @@ function formatComments(commentArray) {
   for (var i = 0; i < commentArray.length; i++) {
     commentMarkup += `<li>${commentArray[i].content}</li>`
   }
-  return commentMarkup
+  return commentMarkup;
 }

@@ -6,6 +6,7 @@ class Idea  {
     this.star = star;
     this.comments = comments;
   }
+
   saveToStorage(idea) {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
@@ -14,6 +15,7 @@ class Idea  {
     retrievedIdeas.push(idea);
     localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
+
   deleteFromStorage() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
@@ -26,6 +28,7 @@ class Idea  {
     }
     localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
+
   updateIdea() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
     if (!retrievedIdeas) {
@@ -35,11 +38,11 @@ class Idea  {
       if (this.id === retrievedIdeas[i].id) {
         this.star = !this.star;
         retrievedIdeas[i].star = this.star;
-        // set the value of this.star to the opposite of the value of this.star
       }
     }
     localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
   }
+  
   storeComment(comment) {
     this.comments.push(comment);
     comment.saveToStorage(comment);
