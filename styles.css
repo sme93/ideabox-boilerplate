@@ -250,6 +250,8 @@ main {
   flex-direction: column;
   padding: .5rem;
 
+  overflow-y: scroll;
+
   color: #1F1F3D;
 }
 
