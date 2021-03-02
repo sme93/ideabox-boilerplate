@@ -36,6 +36,7 @@ main {
  }
 
 .inputs {
+  border-radius: 5px;
   border: 2px solid #5356A4;
 
   color: #5356A4;
@@ -235,6 +236,7 @@ main {
 .card-top-bar {
   display: flex;
   justify-content: space-between;
+  height: 3vw;
   min-height: 25px;
 
   background-color: #1F1F3D;
@@ -248,7 +250,8 @@ main {
 .card-text {
   display: flex;
   flex-direction: column;
-  padding: .5rem;
+  height: 14vw;
+  padding: 1rem;
 
   overflow-y: scroll;
 
@@ -261,7 +264,8 @@ main {
 
 .card-bottom-bar {
   display: flex;
-  height: 2vw;
+  /* align-items: center; */
+  height: 3vw;
   min-height: 25px;
 
   background-color: #5356A4;
@@ -271,6 +275,18 @@ main {
 .comment-button {
     width: 2vw;
     min-width: 25px;
+}
+
+.add-comment-button {
+  height: 2rem;
+
+  border-radius: 5px;
+  border: 2px solid #5356A4;
+
+  color: #FFFFFF;
+
+  font-size: 1rem;
+  font-weight: normal;
 }
 /* ***** End Idea Card ***** */
 /* ********** End Idea Card Section ********** */
