@@ -30,11 +30,25 @@ IdeaBox is a web application that enables users to record, keep track of, and or
 4. Run `index.html`
 
 ## Walkthrough
-1. To add a new idea, enter the appropriate text into the "Title" and "Body" fields and select "Save"
+1. To add a new idea, enter the appropriate text into the "Title" and "Body" fields and select "Save".
+
+![Adding an idea](https://media.giphy.com/media/zsBbYENIOq9uKqMhcg/giphy.gif)
+
 2. Once an idea is added, it can be favorited by selecting the "Favorite" icon at the top left of the idea. Once favorited, the icon will appear filled in. 
+
+![Favoriting an idea](https://media.giphy.com/media/yflzBiPb1CsSLvbH2q/giphy.gif)
+
 3. To display only favorited ideas, select the "Show Starred Ideas" button. Once selected, the button will then display "Show All Ideas". To see all ideas again, select the button again.
+
+![Display favorites](https://media.giphy.com/media/nF2X9kwJHi9MUGWpGG/giphy.gif)
+
 4. If deemed necessary, an idea can be deleted by selecting the "Delete" icon at the top right of the idea. This removes the idea from both the page and local storage.
+
+![Delete an idea](https://media.giphy.com/media/fLaRiSG5xzqvm73KuC/giphy.gif)
+
 5. The search bar can be used to filter what ideas display by the text in their Title or Body.
+
+![Filtering ideas](https://media.giphy.com/media/VTUH8skKUpfXUljatL/giphy.gif)
 
 ## Authors
 <table>
