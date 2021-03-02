@@ -3,6 +3,7 @@ class Comment {
         this.ideaId = ideaId;
         this.content = content;
     }
+    
     saveToStorage(comment) {
       var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
       for (var i = 0; i < retrievedIdeas.length; i++) {
@@ -12,8 +13,8 @@ class Comment {
       }
       localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
     }
+
     deleteFromStorage() {
-        console.log("delete from storage");
-        //delete based on index in comments array
+        
     }
 }
