@@ -44,7 +44,7 @@ IdeaBox is a web application that enables users to record, keep track of, and or
 
 4. If deemed necessary, an idea can be deleted by selecting the "Delete" icon at the top right of the idea. This removes the idea from both the page and local storage.
 
-![Delete an idea](https://media.giphy.com/media/nF2X9kwJHi9MUGWpGG/giphy.gif)
+![Delete an idea](https://media.giphy.com/media/fLaRiSG5xzqvm73KuC/giphy.gif)
 
 5. The search bar can be used to filter what ideas display by the text in their Title or Body.
 
