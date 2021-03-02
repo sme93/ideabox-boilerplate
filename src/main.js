@@ -1,24 +1,28 @@
 //****Global Variables ****
 var newIdea;
 var ideas = [];
+
 // **** querySelectors ****
 var saveButton = document.querySelector("#saveIdeaButton");
-var title = document.querySelector("#titleInput");
-var body = document.querySelector("#bodyInput");
-var searchBar = document.querySelector("#searchInput");
 var ideaBoard = document.querySelector("#ideaBoard");
 var toggleStarredIdeasButton = document.querySelector("#showIdeasButton");
+var searchBar = document.querySelector("#searchInput");
+var title = document.querySelector("#titleInput");
+var body = document.querySelector("#bodyInput");
+
 //**** Event Listeners ****
-ideaBoard.addEventListener("click", deleteIdea);
-ideaBoard.addEventListener("click", favoriteIdea);
 saveButton.addEventListener("click", saveIdea);
+ideaBoard.addEventListener("click", function(event) {
+  if (event.target.id === "favoriteButton") { favoriteIdea(event) }
+  if (event.target.id === "commentButton") { commentIdea(event) }
+  if (event.target.id === "addCommentButton") { addComment(event) } 
+  if (event.target.id === "deleteButton") { deleteIdea(event) } });
+toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
+searchBar.addEventListener("input", filterIdeas);
 title.addEventListener("input", showSave);
 body.addEventListener("input", showSave);
-searchBar.addEventListener("input", filterIdeas);
-ideaBoard.addEventListener("click", commentIdea);
-ideaBoard.addEventListener("click", addComment);
-toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", renderPage);
+
 //**** Functions ****
 function saveIdea(event) {
   event.preventDefault();
@@ -32,6 +36,76 @@ function saveIdea(event) {
   clearInputs();
   saveButton.classList.add('disable-save');
 }
+
+function clearInputs() {
+  title.value = null;
+  body.value = null;
+}
+
+function favoriteIdea(event) {
+  var ideaIndex = event.target.closest("article").id;
+  ideas[ideaIndex].updateIdea();
+  render(ideas);
+}
+
+function commentIdea(event) {
+  var commentInputAndButton = event.target.nextElementSibling;
+  commentInputAndButton.classList.remove("hidden");
+}
+
+function addComment(event) {
+  var ideaIndex = event.target.closest("article").id;
+  var commentInput = event.target.previousElementSibling.value;
+  var newComment = new Comment(ideas[ideaIndex].id, commentInput);
+  ideas[ideaIndex].storeComment(newComment)
+  render(ideas);
+}
+
+function deleteIdea(event) {
+  var ideaIndex = event.target.closest("article").id;
+  ideas[ideaIndex].deleteFromStorage();
+  ideas.splice(ideaIndex, 1);
+  render(ideas);
+}
+
+function toggleStarredIdeas(event) {
+  if (event.srcElement.innerText === "Show Starred Ideas") {
+    toggleStarredIdeasButton.innerHTML = "Show All Ideas";
+    var starredIdeas = [];
+    //loop through each idea currently in data model
+    //if it has a star, add to starredIdeas
+    for (var i = 0; i < ideas.length; i++) {
+      if (ideas[i].star) {
+        starredIdeas.push(ideas[i]);
+      }
+    }
+    //add to favorited ideas array
+    //render favorited ideas
+    render(starredIdeas);
+  } else {
+    toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
+    //render all ideas to page
+    render(ideas);
+  }
+}
+
+function filterIdeas() {
+  var searchQuery = searchBar.value.toLowerCase();
+  var matchingIdeas = [];
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].title.toLowerCase().includes(searchQuery) || ideas[i].body.toLowerCase().includes(searchQuery)) {
+      matchingIdeas.push(ideas[i]);
+    }
+  }
+  render(matchingIdeas);
+}
+
+function showSave () {
+  if (title.value && body.value) {
+    saveButton.classList.remove('disable-save');
+  }
+}
+
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
   if (retrievedIdeas) {
@@ -49,6 +123,7 @@ function renderPage() {
   }
   render(ideas);
 }
+
 function render(arrayToRender) {
     var markup = "";
     for (var i = 0; i < arrayToRender.length; i++) {
@@ -82,6 +157,7 @@ function render(arrayToRender) {
     }
     ideaBoard.innerHTML = markup;
 }
+
 function getImageSourceFromIdea(idea) {
   if (!idea.star) {
     return "./images/star.svg"
@@ -89,79 +165,11 @@ function getImageSourceFromIdea(idea) {
     return "./images/star-active.svg"
   }
 }
-function clearInputs() {
-  title.value = null;
-  body.value = null;
-}
-function showSave () {
-  if (title.value && body.value) {
-    saveButton.classList.remove('disable-save');
-  }
-}
-function favoriteIdea(event) {
-  if (event.target.id === "favoriteButton") {
-    var ideaIndex = event.target.closest("article").id;
-    ideas[ideaIndex].updateIdea();
-    render(ideas);
-  }
-}
-function deleteIdea(event) {
-  if (event.target.id === "deleteButton") {
-    var ideaIndex = event.target.closest("article").id;
-    ideas[ideaIndex].deleteFromStorage();
-    ideas.splice(ideaIndex, 1);
-    render(ideas);
-  }
-}
-function commentIdea(event) {
-  if (event.target.id === "commentButton") {
-    var commentInputAndButton = event.target.nextElementSibling;
-    commentInputAndButton.classList.remove("hidden");
-  }
-}
-function addComment(event) {
-  if (event.target.id === "addCommentButton") {
-    var ideaIndex = event.target.closest("article").id;
-    var commentInput = event.target.previousElementSibling.value;
-    var newComment = new Comment(ideas[ideaIndex].id, commentInput);
-    ideas[ideaIndex].storeComment(newComment)
-    render(ideas);
-  }
-}
+
 function formatComments(commentArray) {
   var commentMarkup = "";
   for (var i = 0; i < commentArray.length; i++) {
     commentMarkup += `<li>${commentArray[i].content}</li>`
   }
   return commentMarkup
-}
-function toggleStarredIdeas(event) {
-  if (event.srcElement.innerText === "Show Starred Ideas") {
-    toggleStarredIdeasButton.innerHTML = "Show All Ideas";
-    var starredIdeas = [];
-    //loop through each idea currently in data model
-    //if it has a star, add to starredIdeas
-    for (var i = 0; i < ideas.length; i++) {
-      if (ideas[i].star) {
-        starredIdeas.push(ideas[i]);
-      }
-    }
-    //add to favorited ideas array
-    //render favorited ideas
-    render(starredIdeas);
-  } else {
-    toggleStarredIdeasButton.innerHTML = "Show Starred Ideas";
-    //render all ideas to page
-    render(ideas);
-  }
-}
-function filterIdeas() {
-  var searchQuery = searchBar.value.toLowerCase();
-  var matchingIdeas = [];
-  for (var i = 0; i < ideas.length; i++) {
-    if (ideas[i].title.toLowerCase().includes(searchQuery) || ideas[i].body.toLowerCase().includes(searchQuery)) {
-      matchingIdeas.push(ideas[i]);
-    }
-  }
-  render(matchingIdeas);
 }
