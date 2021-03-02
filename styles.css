@@ -236,6 +236,9 @@ main {
   display: flex;
   flex-direction: column;
   padding: .5rem;
+
+  overflow-y: scroll;
+
   color: #1F1F3D;
 
 }
@@ -263,6 +266,11 @@ main {
   display: flex;
   color: #1F1F3D;
 }
+/*
+.disable-add-comment {
+  cursor: not-allowed;
+  background-color: #6F6FCA;
+} */
 
 .disable-save {
   cursor: not-allowed;

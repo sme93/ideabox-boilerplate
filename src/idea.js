@@ -1,10 +1,13 @@
 class Idea  {
-  constructor(title, body, star, id) {
+  constructor(title, body, star, id, comments) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.star = star;
-    this.comments = [];
+    this.comments = (comments)
+      ? comments
+      : []
+
   }
   saveToStorage() {
     var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));

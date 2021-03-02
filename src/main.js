@@ -23,6 +23,7 @@ searchBar.addEventListener("input", filterIdeas);
 ideaBoard.addEventListener("click", commentIdea);
 ideaBoard.addEventListener("click", addComment);
 
+
 toggleStarredIdeasButton.addEventListener("click", toggleStarredIdeas);
 window.addEventListener("load", renderPage);
 
@@ -50,7 +51,7 @@ function renderPage() {
   if (storedIdeas) {
     for (var i = 0; i < storedIdeas.length; i++) {
       //returns array as an array of instances of the idea class
-      newIdea = new Idea(storedIdeas[i].title, storedIdeas[i].body, storedIdeas[i].star, storedIdeas[i].id);
+      newIdea = new Idea(storedIdeas[i].title, storedIdeas[i].body, storedIdeas[i].star, storedIdeas[i].id, storedIdeas[i].comments);
       ideas.push(newIdea);
     }
   }
@@ -72,14 +73,19 @@ function render(arrayToRender) {
           <div class="card-text">
             <h3>${arrayToRender[i].title}</h3>
             <p class="card-body">${arrayToRender[i].body}</p>
-            <p class="comments-section" id="commentsSection">Comments: ${arrayToRender[i].comments}</p>
+            <p class="comments-section" id="commentsSection">
+              Comments:
+              <ul>
+                ${formatComments(arrayToRender[i].comments)}
+              </ul>
+            </p>
           </div>
           <div class="card-bottom-bar">
             <input type="image" class="comment-button" id="commentButton" alt="Add comment" src="./images/comment.svg">
             Comment
             <div class="hidden">
               <input class="comment-input inputs" id="commentInput" type="text" name="comment" value="">
-              <button class="add-comment-button" id="addCommentButton">Add Comment</button>
+              <button class="add-comment-button button" id="addCommentButton">Add Comment</button>
             </div>
           </div>
         </article>
@@ -108,6 +114,19 @@ function showSave () {
     saveButton.classList.remove('disable-save');
   }
 }
+
+// function showAddComment (event) {
+//   //not queried, no event listeners
+//   if (inputAddComment.value) {
+//     var inputId = event.target.id;
+//     var commentButtons = document.querySelectorAll(".add-comment-button");
+//     for (var i = 0; i < commentButtons.length; i++) {
+//       if (parseInt(inputId) === commentButtons[i].id) {
+//         inputId.classList.remove('disable-save');
+//       }
+//     }
+//   }
+// }
 
 function favoriteIdea(event) {
   if (event.target.id === "favoriteButton") {
@@ -147,11 +166,24 @@ function commentIdea(event) {
 function addComment(event) {
   if (event.target.id === "addCommentButton") {
     var ideaId = event.target.closest("article").id;
-    var commentInput = event.target.previousElementSibling;
-    var newComment = new Comment(ideaId, commentInput.value);
+    var commentInput = event.target.previousElementSibling.value;
+    var newComment = new Comment(ideaId, commentInput);
     newComment.saveToStorage();
+    for (var i = 0; i < ideas.length; i++) {
+      if (parseInt(ideaId) === ideas[i].id) {
+        ideas[i].comments.push(commentInput)
+      }
+    }
     render(ideas);
   }
+}
+
+function formatComments(commentArray) {
+  var commentMarkup = "";
+  for (var i = 0; i < commentArray.length; i++) {
+    commentMarkup += `<li>${commentArray[i]}</li>`
+  }
+  return commentMarkup
 }
 
 function toggleStarredIdeas(event) {
