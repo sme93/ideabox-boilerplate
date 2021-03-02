@@ -149,14 +149,8 @@ function addComment(event) {
     var ideaId = event.target.closest("article").id;
     var commentInput = event.target.previousElementSibling;
     var newComment = new Comment(ideaId, commentInput.value);
-    // need to add comment to an array stored in comment class?
-
-
-    ideas[ideaId].saveToStorage();
-
-
+    newComment.saveToStorage();
     render(ideas);
-    //comments not rendering on browser, but storing with correct instance of idea class
   }
 }
 

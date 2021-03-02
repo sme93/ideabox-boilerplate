@@ -6,12 +6,10 @@ class Comment {
 
     saveToStorage() {
       var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
-      if (!retrievedIdeas) {
-        return;
-      }
+
       for (var i = 0; i < retrievedIdeas.length; i++) {
-        if (this.id === retrievedIdeas[i].id) {
-            retrievedIdeas[i].comments.push(newComment.content);
+        if (parseInt(this.ideaId) === retrievedIdeas[i].id) {
+            retrievedIdeas[i].comments.push(this.content);
         }
       }
       localStorage.setItem("ideas", JSON.stringify(retrievedIdeas));
@@ -19,5 +17,6 @@ class Comment {
 
     deleteFromStorage() {
         console.log("delete from storage");
+        //delete based on index in comments array
     }
 }
