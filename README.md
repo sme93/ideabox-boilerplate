@@ -9,9 +9,9 @@
 
 ## Description
 
-Ever have a billion dollar idea that you're confident you'll remember but end up completely forgetting, waking up 30 years later wondering what the hell happened? Maybe if you'd had a quick and easy way of jotting that idea down, you'd be yachting it up on the French Riviera and Denice wouldn't have left with the kids.
+Ever have a billion dollar idea that you're confident you'll remember but end up completely forgetting, waking up 30 years later wondering what the hell happened? Maybe if you'd had a quick and easy way of jotting that idea down, you'd be yachting it up on the French Riviera instead of passed out on a floaty at the public pool.
 
-IdeaBox is a web application that enables users to record, keep track of, and organize their original thoughts and schemes small and large. Designed with persistence in mind, IdeaBox utilizes local storage to ensure that your genius idea of opening up a summer camp for cats is never forgotten (ever). 
+IdeaBox is a web application that enables users to record, keep track of, and organize their original thoughts and grand schemes small and large. Designed with persistence in mind, IdeaBox utilizes local storage to ensure that your genius idea of opening up a summer camp for cats is never forgotten (ever). 
 
 ### Notable features
 * Users can favorite any ideas that they save
