@@ -26,27 +26,33 @@ main {
 }
 /* End Shared CSS */
 /*  Sarah's CSS begin */
+.inputs {
+  border: 2px solid #5356A4;
+  color: #5356A4;
+}
+
 .button {
   background-color: #353567;
   font-weight: bold;
   color: #E9E9F3;
-  height: 2rem;
-  /* border-style: none; */
 }
-.inputs {
-  border: 2px solid #5356A4;
-}
-.title-input {
-  height: 2rem;
+
+.title-input, 
+.button, 
+.search-term {
+  height: 2.75rem;
+  font-size: 1.25rem;
+  
 }
 .body-input {
-  height: 4rem;
+  height: 5.25rem;
+  font-size: 1.25rem;
 }
 .add-search-forms {
   background-color: #A9AAD2;
   display: flex;
   flex-direction: column;
-   padding: .825rem;
+   padding: 1.5rem;
 }
 .form {
   display: flex;
@@ -57,8 +63,8 @@ main {
 .form label,
 .search,
 .body-input {
-  max-width: 40%;
-  min-width: 40%;
+  max-width: 45%;
+  min-width: 45%;
   font-family: open sans, light;
 }
 @media screen and (max-width: 998px) {
@@ -73,13 +79,13 @@ main {
 .form label {
   color: #1F1F3D;
   font-weight: bold;
-  font-size: .75rem;
+  font-size: 1.1rem;
   margin-bottom: .25rem;
 }
 .title-input,
 .body-input,
 .form {
-  margin-bottom: 1rem;
+  margin-bottom: 1.75rem;
 }
 /* **********Search Bar********** */
 .search {
@@ -97,20 +103,26 @@ main {
   width: 100%;
   min-height:2rem;
 }
+
+.search-term::placeholder {
+  color:#6F6FCA;
+  font-weight: 100;
+}
+
 .search-term:focus{
   color: #1F1F3D;
 }
 .search-icon {
-  min-width: 2.35rem;
-  min-height: 2.35rem;
+  min-width: 3.1rem;
+  min-height: 3.1rem;
   background:#353567;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .search-icon-svg {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 /*  Sarah's CSS end */
 /*  Jon's CSS begin */
