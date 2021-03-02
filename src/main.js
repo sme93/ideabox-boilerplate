@@ -1,4 +1,3 @@
-var newIdea;
 var ideas = [];
 
 var saveButton = document.querySelector("#saveIdeaButton");
@@ -25,7 +24,7 @@ function saveIdea(event) {
   if (!title.value || !body.value) {
     return
   }
-  newIdea = new Idea(title.value, body.value, false, Date.now());
+  var newIdea = new Idea(title.value, body.value, false, Date.now());
   newIdea.saveToStorage(newIdea);
   ideas.push(newIdea);
   render(ideas);
@@ -97,18 +96,22 @@ function showSave () {
   }
 }
 
+function getCommentsFromIdea(ideaComments) {
+  var comments = [];
+  for (var i = 0; i < ideaComments.length; i++) {
+    var comment = new Comment(ideaComments[i].ideaId, ideaComments[i].content)
+    comments.push(comment);
+  }
+  return comments;
+}
+
 function renderPage() {
   var retrievedIdeas = JSON.parse(localStorage.getItem("ideas"));
   if (retrievedIdeas) {
     for (var i = 0; i < retrievedIdeas.length; i++) {
       var currentIdea = retrievedIdeas[i];
-      var storedComments = [];
-      var currentIdeasComments = currentIdea.comments;
-      for (var k = 0; k < currentIdeasComments.length; k++) {
-        var comment = new Comment(currentIdeasComments[k].ideaId, currentIdeasComments[k].content)
-        storedComments.push(comment);
-      }
-      newIdea = new Idea(currentIdea.title, currentIdea.body, currentIdea.star, currentIdea.id, storedComments);
+      var storedComments = getCommentsFromIdea(currentIdea.comments);
+      var newIdea = new Idea(currentIdea.title, currentIdea.body, currentIdea.star, currentIdea.id, storedComments);
       ideas.push(newIdea);
     }
   }
